@@ -1,0 +1,33 @@
+<div class="overlay" data-aos="zoom-in-up">
+    <div class="header-holder">
+        <nav>
+            <ul class="brand-info d-flex">
+                <li class="email flex-grow-1">{{'info@alarjwan.com'}}</li>
+                <li class="social-media flex-grow-1">
+                    <a [href]="'#'"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a [href]="'#'"><i class="fa-brands fa-instagram"></i></a>
+                </li>
+                <li class="address flex-grow-1">{{'rydah, saudi arabia'}}</li>
+                <li class="phone flex-grow-1">{{'+9012219229'}}</li>
+            </ul>
+            <div class="navbar d-flex">
+                <a href="#" class="logo"><img src="/assets/images/logo.jpeg" alt="alarjwan logo"></a>
+                <ul class="d-flex navbar-links">
+                    <li class="link-holder"><a href="#">who is us</a></li>
+                    <li class="link-holder"><a href="#">Menu</a></li>
+                    <li class="link-holder"><a href="#">subscription</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <header class="header" >
+            <h1 data-aos="zoom-in-up">Food from heart. Made with love.</h1>
+            <h2>Enjoy Each Bite</h2>
+        </header>
+    </div>
+    <div class="bg">
+        <img [src]="previousImage.src" alt="" [class.visible]="!fade" />
+        <img [src]="image.src" alt="" [class.visible]="fade" />
+    </div>
+
+</div>

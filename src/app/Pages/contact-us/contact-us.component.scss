@@ -1,0 +1,48 @@
+
+.contact-holder {
+    overflow: hidden;
+}
+
+.contact-card:hover {
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #637359;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #505d46;
+            transform: translateY(-2px);
+        }
+
+        .nav-link {
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #637359;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .hero-bg {
+            background: linear-gradient(rgba(99, 115, 89, 0.85), rgba(99, 115, 89, 0.9)), url('https://static.photos/nature/1200x630/42') center/cover no-repeat;
+        }
+
+        .form-input:focus {
+            border-color: #637359;
+            box-shadow: 0 0 0 3px rgba(99, 115, 89, 0.2);
+        }

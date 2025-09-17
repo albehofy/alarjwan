@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap');
+
+:host {
+  font-family: 'Tajawal', sans-serif;
+  background-color: #f9f7f1;
+  display: block;
+}
+
+.category-card {
+  transition: all 0.3s ease;
+}
+.category-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.item-card {
+  transition: all 0.2s ease;
+  border: 2px solid #e5e7eb;
+}
+.item-card:hover {
+  border-color: #637359;
+}
+.item-card.selected {
+  border-color: #637359;
+  background-color: #f0f4eb;
+}
+
+.btn-primary {
+  background-color: #637359;
+  transition: all 0.3s ease;
+}
+.btn-primary:hover {
+  background-color: #505d46;
+  transform: translateY(-2px);
+}
+
+.nav-link {
+  position: relative;
+  padding-bottom: 5px;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #637359;
+  transition: width 0.3s ease;
+}
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.hero-bg {
+  background: linear-gradient(rgba(99, 115, 89, 0.85), rgba(99, 115, 89, 0.9)),
+    url('https://static.photos/food/1200x630/42') center/cover no-repeat;
+}
+
+.counter-btn {
+  background-color: #637359;
+  color: white;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  user-select: none;
+}
+.counter-btn:hover {
+  background-color: #505d46;
+}

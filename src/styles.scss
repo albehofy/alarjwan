@@ -1,1 +1,72 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: "karla";
+    src: url('/assets/fonts/karla-qkbbxvyc6trat7rvltw.woff2');
+}
+
+@font-face {
+    font-family: "tenorsans";
+    src: url('/assets/fonts/tenorsans-bx6anxqunekx06ukixisn3v4cg.woff2');
+}
+
+@font-face {
+    font-family: "Rubik";
+    src: url('/assets/fonts/alfont_com_Effra_Rg.ttf');
+}
+
+/* global styles */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    direction: rtl;
+    font-family: Rubik, sans-serif;
+}
+
+.relative {
+    position: relative;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-capitalize {
+    text-transform: capitalize;
+}
+
+.bg-transparent {
+    background: transparent;
+}
+
+.bg-white {
+    background: #FFF;
+}
+
+.px-1 {
+    padding: 0 0.25rem;
+}
+
+.py-1 {
+    padding: 0.25rem 0;
+}
+
+.p-1 {
+    padding: 0.25rem;
+}
+
+.d-flex {
+    display: flex;
+
+    .flex-grow-1 {
+        flex-grow: 1;
+    }
+}

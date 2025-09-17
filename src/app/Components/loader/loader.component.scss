@@ -1,0 +1,31 @@
+.loader-container  {
+  text-align: center;
+  padding: 40px 0 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #637359;
+  z-index: 999999;
+  overflow: hidden;
+  & > h2 {
+    color: #FFF;
+    font-size: 3rem;
+  }
+  svg {
+    width: 100px;
+    height: 100px;
+    margin: 50px;
+    display: inline-block;
+  }
+  
+  #Layer_1 rect {
+    fill: #FFF;
+  }
+}
+
