@@ -3,6 +3,7 @@ import { HomeComponent } from './Pages/home/home.component';
 import { AboutComponent } from './Pages/about/about.component';
 import { ContactUsComponent } from './Pages/contact-us/contact-us.component';
 import { SubscriptionComponent } from './Pages/subscription/subscription.component';
+import { GlobalMenuComponent } from './Pages/global-menu/global-menu.component';
 
 export const routes: Routes = [
     {
@@ -20,5 +21,9 @@ export const routes: Routes = [
     {
         path: 'contact-us', 
         component: ContactUsComponent
-    }
+    }, 
+    {
+        path: 'menu', 
+        component: GlobalMenuComponent
+    }, 
 ];
