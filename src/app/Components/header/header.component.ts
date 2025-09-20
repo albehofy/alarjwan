@@ -1,21 +1,24 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
 import * as AOS from 'aos';
+import { RouterLink } from '@angular/router';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
+  imports: [RouterLink],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   images = [
-    { name: 'image', src: '/assets/images/header1.png' },
-    { name: 'image', src: '/assets/images/header2.png' },
-    { name: 'image', src: '/assets/images/header1.png' },
-    { name: 'image', src: '/assets/images/header2.png' },
-    { name: 'image', src: '/assets/images/header1.png' },
-    { name: 'image', src: '/assets/images/header2.png' },
-    { name: 'image', src: '/assets/images/header1.png' },
-    { name: 'image', src: '/assets/images/header2.png' }
+    { name: 'image', src: 'assets/images/header1.png' },
+    { name: 'image', src: 'assets/images/header2.png' },
+    { name: 'image', src: 'assets/images/header1.png' },
+    { name: 'image', src: 'assets/images/header2.png' },
+    { name: 'image', src: 'assets/images/header1.png' },
+    { name: 'image', src: 'assets/images/header2.png' },
+    { name: 'image', src: 'assets/images/header1.png' },
+    { name: 'image', src: 'assets/images/header2.png' },
   ];
 
   image = this.images[0];
@@ -35,7 +38,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.image = this.images[this.index];
       // this.fade = !this.fade; // toggle fade class to trigger transition
     });
-  AOS.init({
+    AOS.init({
       // Global settings:
       disable: false,
       startEvent: 'DOMContentLoaded',
@@ -55,12 +58,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
       mirror: false,
 
       // Anchor placement:
-      anchorPlacement: 'top-bottom'
+      anchorPlacement: 'top-bottom',
     });
-  
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  toggleNavbar() {
+    const navbar = document.querySelector('.navbar');
+    navbar?.classList.toggle('active');
   }
 }

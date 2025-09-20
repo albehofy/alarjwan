@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { SeparatorComponent } from "./separator/separator.component";
 import { HeaderComponent } from "../../Components/header/header.component";
+import { RouterLink } from '@angular/router';
+
 // import * as AOS from 'aos';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [SeparatorComponent, HeaderComponent],
+  imports: [SeparatorComponent, HeaderComponent, RouterLink],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })

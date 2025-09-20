@@ -1,82 +1,125 @@
-<div style="overflow: hidden;">
-    <!-- Header -->
-    <app-header />
-    <!-- Seprator -->
-    <app-separator [header]="'اختر من باقاتنا المميزة'"
-        [title]="'اختر من الباقات المتاحة لدينا حيث اننا نقدم لكم مجموعة من الباقات المميزة'"
-        [description]="'كل باقة تحتوي على عدد من الاطباق المميزة والفريدة حيث انه يمكنك اختيار الباقة التحكم كذلك بما تجتوية فى بعض الباقات'" />
+<div style="overflow: hidden">
+  <!-- Header -->
+  <app-header />
+  <!-- Seprator -->
+  <app-separator
+    [header]="'اختر من باقاتنا المميزة'"
+    [title]="
+      'اختر من الباقات المتاحة لدينا حيث اننا نقدم لكم مجموعة من الباقات المميزة'
+    "
+    [description]="
+      'كل باقة تحتوي على عدد من الاطباق المميزة والفريدة حيث انه يمكنك اختيار الباقة التحكم كذلك بما تجتوية فى بعض الباقات'
+    "
+  />
 
-    <!-- Subscriptions -->
-    <div class="subscriptions">
-        <div class="subscription" data-aos="fade-up" data-aos-duration="600"  dir="ltr">
-            <div class="subscription-img" data-aos="fade-up-left" data-aos-duration="500">
-                <img src="/assets/images/header2.png" alt="">
-            </div>
-            <div class="subscription-data">
-                <h2 class="header">الوليمة الأساسية</h2>
-                <p>مثالية للأفراد الذين يبحثون عن تجربة طعام بسيطة ومميزة لمرة واحدة.</p>
-                <p class="price">٣٧٫٥٠ ريال سعودي</p>
-                <h3>الأطباق الرئيسية</h3>
-                <ul>
-                    <li>كبسة دجاج</li>
-                    <li>مندي لحم</li>
-                </ul>
-                <h3>المقبلات</h3>
-                <ul>
-                    <li>حمص بالطحينة</li>
-                    <li>سلطة فتوش</li>
-                    <li>ورق عنب</li>
-                </ul>
-                <button class="subscribe-btn">اطلب الآن</button>
-            </div>
-        </div>
-        <div class="subscription " data-aos="fade-up" data-aos-duration="600"  dir="rtl">
-            <div class="subscription-img" data-aos="fade-up-left" data-aos-duration="500">
-                <img src="/assets/images/header2.png" alt="">
-            </div>
-            <div class="subscription-data">
-                <h2 class="header">الوليمة الأساسية</h2>
-                <p>مثالية للأفراد الذين يبحثون عن تجربة طعام بسيطة ومميزة لمرة واحدة.</p>
-                <p class="price">٣٧٫٥٠ ريال سعودي</p>
-                <h3>الأطباق الرئيسية</h3>
-                <ul>
-                    <li>كبسة دجاج</li>
-                    <li>مندي لحم</li>
-                </ul>
-                <h3>المقبلات</h3>
-                <ul>
-                    <li>حمص بالطحينة</li>
-                    <li>سلطة فتوش</li>
-                    <li>ورق عنب</li>
-                </ul>
-                <button class="subscribe-btn">اطلب الآن</button>
-            </div>
-        </div>
-        <div class="subscription" data-aos="fade-up" data-aos-duration="600"  dir="ltr">
-            <div class="subscription-img" data-aos="fade-up-left" data-aos-duration="500">
-                <img src="/assets/images/header2.png" alt="">
-            </div>
-            <div class="subscription-data">
-                <h2 class="header">الوليمة الأساسية</h2>
-                <p>مثالية للأفراد الذين يبحثون عن تجربة طعام بسيطة ومميزة لمرة واحدة.</p>
-                <p class="price">٣٧٫٥٠ ريال سعودي</p>
-                <h3>الأطباق الرئيسية</h3>
-                <ul>
-                    <li>كبسة دجاج</li>
-                    <li>مندي لحم</li>
-                </ul>
-                <h3>المقبلات</h3>
-                <ul>
-                    <li>حمص بالطحينة</li>
-                    <li>سلطة فتوش</li>
-                    <li>ورق عنب</li>
-                </ul>
-                <button class="subscribe-btn">اطلب الآن</button>
-            </div>
-        </div>
+  <!-- Subscriptions -->
+  <div class="subscriptions">
+    <div
+      class="subscription"
+      data-aos="fade-up"
+      data-aos-duration="600"
+      dir="ltr"
+    >
+      <div
+        class="subscription-img"
+        data-aos="fade-up-left"
+        data-aos-duration="500"
+      >
+        <img src="assets/images/header2.png" alt="" />
+      </div>
+      <div class="subscription-data">
+        <h2 class="header">الوليمة الأساسية</h2>
+        <p>
+          مثالية للأفراد الذين يبحثون عن تجربة طعام بسيطة ومميزة لمرة واحدة.
+        </p>
+        <p class="price">٣٧٫٥٠ ريال سعودي</p>
+        <h3>الأطباق الرئيسية</h3>
+        <ul>
+          <li>كبسة دجاج</li>
+          <li>مندي لحم</li>
+        </ul>
+        <h3>المقبلات</h3>
+        <ul>
+          <li>حمص بالطحينة</li>
+          <li>سلطة فتوش</li>
+          <li>ورق عنب</li>
+        </ul>
+        <button class="subscribe-btn" [routerLink]="['/subscription']">
+          اطلب الآن
+        </button>
+      </div>
     </div>
+    <div
+      class="subscription"
+      data-aos="fade-up"
+      data-aos-duration="600"
+      dir="rtl"
+    >
+      <div
+        class="subscription-img"
+        data-aos="fade-up-left"
+        data-aos-duration="500"
+      >
+        <img src="assets/images/header2.png" alt="" />
+      </div>
+      <div class="subscription-data">
+        <h2 class="header">الوليمة الأساسية</h2>
+        <p>
+          مثالية للأفراد الذين يبحثون عن تجربة طعام بسيطة ومميزة لمرة واحدة.
+        </p>
+        <p class="price">٣٧٫٥٠ ريال سعودي</p>
+        <h3>الأطباق الرئيسية</h3>
+        <ul>
+          <li>كبسة دجاج</li>
+          <li>مندي لحم</li>
+        </ul>
+        <h3>المقبلات</h3>
+        <ul>
+          <li>حمص بالطحينة</li>
+          <li>سلطة فتوش</li>
+          <li>ورق عنب</li>
+        </ul>
+        <button class="subscribe-btn" [routerLink]="['/subscription']">
+          اطلب الآن
+        </button>
+      </div>
+    </div>
+    <div
+      class="subscription"
+      data-aos="fade-up"
+      data-aos-duration="600"
+      dir="ltr"
+    >
+      <div
+        class="subscription-img"
+        data-aos="fade-up-left"
+        data-aos-duration="500"
+      >
+        <img src="assets/images/header2.png" alt="" />
+      </div>
+      <div class="subscription-data">
+        <h2 class="header">الوليمة الأساسية</h2>
+        <p>
+          مثالية للأفراد الذين يبحثون عن تجربة طعام بسيطة ومميزة لمرة واحدة.
+        </p>
+        <p class="price">٣٧٫٥٠ ريال سعودي</p>
+        <h3>الأطباق الرئيسية</h3>
+        <ul>
+          <li>كبسة دجاج</li>
+          <li>مندي لحم</li>
+        </ul>
+        <h3>المقبلات</h3>
+        <ul>
+          <li>حمص بالطحينة</li>
+          <li>سلطة فتوش</li>
+          <li>ورق عنب</li>
+        </ul>
+        <button class="subscribe-btn" [routerLink]="['/subscription']">
+          اطلب الآن
+        </button>
+      </div>
+    </div>
+  </div>
 
-    <!-- contact -->
-
-
+  <!-- contact -->
 </div>
