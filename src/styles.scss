@@ -1,22 +1,12 @@
 @font-face {
-    font-family: "karla";
-    src: url('/assets/fonts/karla-qkbbxvycs6trat7rvltw.woff2');
-}
-
-@font-face {
-    font-family: "tenorsans";
-    src: url('/assets/fonts/tenorsans-bx6anxqunekx06ukixisn3v4cg.woff2');
-}
-
-@font-face {
     font-family: "Effra_Rg";
-    src: url('/assets/fonts/effra_Rg.ttf');
+    src: url('/assets/fonts/effra.ttf');
 }
 
-@font-face {
-    font-family: "SF-Mada";
-    src: url('/assets/fonts/SF-Mada.ttf');
-}
+// @font-face {
+//     font-family: "SF-Mada";
+//     src: url('/assets/fonts/SF-Mada.ttf');
+// }
 
 /* global styles */
 *,
@@ -32,7 +22,7 @@
 }
 
 .Effra_Rg{
-    font-family: Effra_Rg,sans-serif!important;
+    font-family: "Effra_Rg",sans-serif!important;
 }
 
 h1, h2, h3, h4,h5,h6 {
