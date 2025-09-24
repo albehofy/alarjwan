@@ -15,7 +15,7 @@ export const routes: Routes = [
         component: AboutComponent
     }, 
     {
-        path: 'subscription', 
+        path: 'subscription/:id', 
         component: SubscriptionComponent
     },
     {

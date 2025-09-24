@@ -13,113 +13,41 @@
   />
 
   <!-- Subscriptions -->
-  <div class="subscriptions">
-    <div
-      class="subscription"
-      data-aos="fade-up"
-      data-aos-duration="600"
-      dir="ltr"
-    >
+  @for(package of packages; track package.id ; let i = $index) {
+  <div class="subscriptions" [dir]="(i + 2) % 2 === 0 ? 'ltr' : 'rtl'">
+    <div class="subscription" data-aos="fade-up" data-aos-duration="600">
       <div
         class="subscription-img"
         data-aos="fade-up-left"
         data-aos-duration="500"
       >
-        <img src="assets/images/header2.png" alt="" />
+        <img [src]="package.image" alt="package image" />
       </div>
-      <div class="subscription-data">
-        <h2 class="header">الوليمة الأساسية</h2>
+      <div class="subscription-data" dir="ltr">
+        <h2 class="header">{{ package.name }}</h2>
         <p>
-          مثالية للأفراد الذين يبحثون عن تجربة طعام بسيطة ومميزة لمرة واحدة.
+          {{ package.details }}
         </p>
-        <p class="price">٣٧٫٥٠ ريال سعودي</p>
-        <h3>الأطباق الرئيسية</h3>
-        <ul>
-          <li>كبسة دجاج</li>
-          <li>مندي لحم</li>
-        </ul>
-        <h3>المقبلات</h3>
-        <ul>
-          <li>حمص بالطحينة</li>
-          <li>سلطة فتوش</li>
-          <li>ورق عنب</li>
-        </ul>
-        <button class="subscribe-btn" [routerLink]="['/subscription']">
-          اطلب الآن
-        </button>
-      </div>
-    </div>
-    <div
-      class="subscription"
-      data-aos="fade-up"
-      data-aos-duration="600"
-      dir="rtl"
-    >
-      <div
-        class="subscription-img"
-        data-aos="fade-up-left"
-        data-aos-duration="500"
-      >
-        <img src="assets/images/header2.png" alt="" />
-      </div>
-      <div class="subscription-data">
-        <h2 class="header">الوليمة الأساسية</h2>
-        <p>
-          مثالية للأفراد الذين يبحثون عن تجربة طعام بسيطة ومميزة لمرة واحدة.
+        <p class="price flex space-x-2">
+          <img class="w-6 h-6" src="assets/images/riyal.png" alt="sar" />
+          <span>{{ package.price }} </span>
         </p>
-        <p class="price">٣٧٫٥٠ ريال سعودي</p>
-        <h3>الأطباق الرئيسية</h3>
+        @for(section of package.sections; track section.id ; let j = $index) {
+        <h3>{{ section.name }}</h3>
+
         <ul>
-          <li>كبسة دجاج</li>
-          <li>مندي لحم</li>
+          @for(addon of section.addons; track addon.id ; let k = $index) {
+          <li>{{ addon.recipeName }}</li>
+          }
         </ul>
-        <h3>المقبلات</h3>
-        <ul>
-          <li>حمص بالطحينة</li>
-          <li>سلطة فتوش</li>
-          <li>ورق عنب</li>
-        </ul>
-        <button class="subscribe-btn" [routerLink]="['/subscription']">
-          اطلب الآن
-        </button>
-      </div>
-    </div>
-    <div
-      class="subscription"
-      data-aos="fade-up"
-      data-aos-duration="600"
-      dir="ltr"
-    >
-      <div
-        class="subscription-img"
-        data-aos="fade-up-left"
-        data-aos-duration="500"
-      >
-        <img src="assets/images/header2.png" alt="" />
-      </div>
-      <div class="subscription-data">
-        <h2 class="header">الوليمة الأساسية</h2>
-        <p>
-          مثالية للأفراد الذين يبحثون عن تجربة طعام بسيطة ومميزة لمرة واحدة.
-        </p>
-        <p class="price">٣٧٫٥٠ ريال سعودي</p>
-        <h3>الأطباق الرئيسية</h3>
-        <ul>
-          <li>كبسة دجاج</li>
-          <li>مندي لحم</li>
-        </ul>
-        <h3>المقبلات</h3>
-        <ul>
-          <li>حمص بالطحينة</li>
-          <li>سلطة فتوش</li>
-          <li>ورق عنب</li>
-        </ul>
-        <button class="subscribe-btn" [routerLink]="['/subscription']">
+        }
+        <button class="subscribe-btn" [routerLink]="['/subscription' , package.id]">
           اطلب الآن
         </button>
       </div>
     </div>
   </div>
+  }
 
   <!-- contact -->
 </div>
