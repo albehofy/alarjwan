@@ -8,3 +8,15 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+.close-modal {
+  background: #fff;
+  display: flex;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  justify-content: center;
+  align-items: center;
+  padding-top: 7px;
+  top: -32px;
+  left: -17px;
+}

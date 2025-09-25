@@ -1,1 +1,185 @@
+<div>
+  <!-- Header / Subscription Info -->
+  <header class="bg-[#637359] py-8 text-center text-white" data-aos="fade-down">
+    <h1 class="text-4xl font-extrabold mb-2">{{ packageData?.name }}</h1>
+    <p class="text-lg flex m-auto justify-center items-center gap-2">
+      <span class="font-semibold">
+        السعر الإجمالي :
+        {{ packageData?.price }}
+      </span>
+      <img class="w-6 h-6" src="assets/images/riyal.png" alt="sar" />
+    </p>
+  </header>
+  <!-- Hero Section -->
+  <section
+    class="relative overflow-hidden py-20 text-center bg-center bg-cover bg-no-repeat"
+    [style.background-image]="
+      'linear-gradient(rgba(99,115,89,0.85), rgba(99,115,89,0.9)), url(' +
+      packageData?.image +
+      ')'
+    "
+  >
+    <div class="max-w-7xl mx-auto px-4">
+      <h2
+        class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white"
+        data-aos="fade-up"
+      >
+        اختيار الأصناف
+      </h2>
+      <p
+        class="mt-4 text-lg text-indigo-100 max-w-3xl mx-auto"
+        data-aos="fade-up"
+        data-aos-delay="200"
+      >
+        اختر الأصناف التي ترغب بها من كل فئة لتكوين وجبتك المثالية
+      </p>
+    </div>
+  </section>
 
+  <!-- Items Selection -->
+  <main class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12" data-aos="fade-up">
+        <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+          فئات الأصناف
+        </h2>
+        <p class="mt-3 text-xl text-gray-500">
+          اختر الأصناف التي ترغب بها من كل فئة أدناه
+        </p>
+      </div>
+
+      <!-- sections -->
+
+      <div class="space-y-16">
+        @for(section of packageData?.sections; track section.id ; let i =
+        $index) {
+        <section
+          class="category-card bg-white rounded-lg shadow-md p-6"
+          data-aos="fade-up"
+          [attr.data-aos-delay]="i * 100"
+        >
+          <header class="border-b border-gray-200 pb-4 mb-6">
+            <h3 class="text-2xl font-bold text-gray-900">{{ section.name }}</h3>
+            <p class="mt-1 text-gray-600">{{ section.description }}</p>
+            <p class="mt-1 text-sm text-gray-600">
+              حد الاختيار: {{ section.limit }} عنصر(عناصر)
+            </p>
+          </header>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            @for(addon of section.addons ; track addon.id ; let j = $index) {
+            <article
+              class="item-card bg-white rounded-lg shadow-sm p-4"
+              [class.opacity-50]="addon.disabled"
+              [class.cursor-not-allowed]="addon.disabled"
+              [ngClass]="{ selected: addon.count > 0 }"
+              [attr.data-category]="section.id"
+            >
+              <div class="flex justify-between items-start">
+                <div>
+                  <h4 class="text-lg font-bold text-gray-900">
+                    {{ addon.recipeName }}
+                  </h4>
+                  <!-- <p class="text-sm text-gray-600 mt-1">{{ addon.description }}</p> -->
+                </div>
+                <img
+                  [src]="addon.image"
+                  [alt]="addon.recipeName"
+                  class="w-16 h-16 rounded-md object-cover"
+                />
+              </div>
+              <div class="mt-4 flex items-center justify-between">
+                <span class="text-sm text-gray-600">الكمية:</span>
+                <div class="flex items-center space-x-3 space-x-reverse">
+                  <button
+                    (click)="decreaseCount(section, addon)"
+                    [disabled]="addon.count === 0"
+                    class="counter-btn decrease px-2 py-1 bg-gray-200 rounded-md"
+                  >
+                    -
+                  </button>
+                  <span class="counter-value font-bold">{{ addon.count }}</span>
+                  <button
+                    (click)="increaseCount(section, addon)"
+                    [disabled]="addon.disabled"
+                    class="counter-btn increase px-2 py-1 bg-gray-200 rounded-md"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+            </article>
+            }
+          </div>
+        </section>
+        }
+      </div>
+      <!-- Order Summary + Cart Button -->
+      <div class="mt-16 flex justify-center">
+        <button
+          (click)="toggleCart()"
+          [disabled]="selectedItems.length === 0"
+          class="btn-primary py-3 px-8 rounded-md font-medium text-white bg-[#637359] hover:bg-[#4a5a40]"
+        >
+          استعراض السلة ({{ selectedItems.length }} عنصر)
+        </button>
+      </div>
+
+      <!-- Cart Modal / Summary -->
+      <section
+        *ngIf="showCart"
+        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+      >
+        <div class="bg-white rounded-xl p-6 w-full max-w-lg relative">
+          <button
+            (click)="toggleCart()"
+            class="absolute top-2 left-5 text-gray-600 hover:text-gray-900 text-xl font-bold"
+          >
+            &times;
+          </button>
+          <h2 class="text-2xl font-bold text-[#637359] mb-4">سلة الاشتراك</h2>
+          <div class="mb-4 max-h-60 overflow-y-auto">
+            <div
+              *ngFor="let item of selectedItems; let idx = index"
+              class="flex justify-between items-center py-2 border-b"
+            >
+              <div>
+                <span class="font-medium">{{ item.name }}</span>
+                <span class="text-gray-600 mr-2">({{ item.count }})</span>
+              </div>
+              <div class="flex space-x-2 space-x-reverse">
+                <button
+                  (click)="removeFromCart(item)"
+                  class="text-red-600 hover:text-red-800 font-bold px-2"
+                >
+                  حذف
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Warning message if not all categories complete -->
+          <div
+            *ngIf="!isAllCategoriesComplete()"
+            class="mb-4 text-red-600 font-semibold"
+          >
+            يرجى اختيار جميع الأصناف المتاحة في كل فئة قبل تأكيد الاشتراك.
+          </div>
+
+          <div class="border-t pt-4 flex justify-between items-center">
+            <div class="text-lg font-bold">
+              الإجمالي:
+              <span class="text-[#637359]">{{ totalPrice }} ريال</span>
+            </div>
+            <button
+              class="px-4 py-2 bg-[#637359] text-white rounded-lg hover:bg-[#4a5a40]"
+              (click)="confirmOrder(); resetSelection()"
+              [disabled]="!isAllCategoriesComplete()"
+            >
+              تأكيد الاشتراك
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>

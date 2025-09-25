@@ -31,16 +31,16 @@
         <p class="price flex space-x-2">
           <img class="w-6 h-6" src="assets/images/riyal.png" alt="sar" />
           <span>{{ package.price }} </span>
-        </p>
-        @for(section of package.sections; track section.id ; let j = $index) {
-        <h3>{{ section.name }}</h3>
-
-        <ul>
-          @for(addon of section.addons; track addon.id ; let k = $index) {
-          <li>{{ addon.recipeName }}</li>
+        </p>       
+          @for(section of package.sections; track section.id ; let j = $index) {
+          <h3>{{ section.name }}</h3>
+          <ul>
+            @for(addon of section.addons; track addon.id ; let k = $index) {
+            <li>{{ addon.recipeName }}</li>
+            }
+          </ul>
           }
-        </ul>
-        }
+      
         <button class="subscribe-btn" [routerLink]="['/subscription' , package.id]">
           اطلب الآن
         </button>

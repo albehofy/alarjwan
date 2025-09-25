@@ -1,14 +1,22 @@
 import { AfterViewInit, Component } from '@angular/core';
 declare var AOS: any;
 declare var feather: any;
+import { FormsModule } from '@angular/forms';
+import { ContactUsComponentService } from '../../Services/conact-us.service';
 @Component({
   selector: 'app-contact-us',
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './contact-us.component.html',
-  styleUrl: './contact-us.component.scss'
+  styleUrl: './contact-us.component.scss',
 })
 export class ContactUsComponent implements AfterViewInit {
-
+  constructor(private contactUsService: ContactUsComponentService) {}
+  contactForm = {
+    fullName: '',
+    email: '',
+    phoneNumber: '',
+    messageText: '',
+  };
   ngAfterViewInit(): void {
     if (AOS) {
       AOS.init();
@@ -17,6 +25,23 @@ export class ContactUsComponent implements AfterViewInit {
       feather.replace();
     }
   }
+
+  submitContactForm() {
+    console.log('Contact Form Submitted:', this.contactForm);
+    this.contactUsService.submitMessage(this.contactForm).subscribe({
+      next: (response: any) => {
+        console.log('تم إرسال الرسالة بنجاح', response);
+      },
+      error: (error: any) => {
+        console.error('خطأ في إرسال الرسالة', error);
+      },
+    });
+    alert('تم إرسال رسالتك بنجاح! سنقوم بالرد عليك قريبًا.');
+    this.contactForm = {
+      fullName: '',
+      email: '',
+      phoneNumber: '',
+      messageText: '',
+    };
+  }
 }
-
-
