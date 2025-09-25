@@ -1,3 +1,4 @@
+import { MenuService } from './../../Services/menu.service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -33,8 +34,26 @@ export class GlobalMenuComponent implements OnInit {
   selectedDish: Dish | null = null;
   showDishModal: boolean = false;
 
+  menuData: any[] = [];
+
+     constructor(
+    private MenuService: MenuService
+  ) { }
+
   ngOnInit(): void {
     this.loadCartFromStorage();
+    this.loadAllMenuData();
+  }
+  loadAllMenuData(): void {
+      this.MenuService.getAllMenuData().subscribe({
+      next: (data) => {
+        console.log('Packages loaded:', data);
+        this.menuData = data;
+      },
+      error: (err: any) => {
+        console.error('Error loading packages:', err);
+      }
+    });
   }
 
   updateCuisineHeader(name: string, imageUrl: string): void {
