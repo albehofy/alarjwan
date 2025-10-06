@@ -1,0 +1,111 @@
+<div class="max-w-3xl mx-auto p-6">
+  <h1 class="text-2xl font-bold mb-6">تأكيد الطلب</h1>
+
+  <!-- بيانات العميل -->
+  <form (ngSubmit)="submitOrder()" #orderForm="ngForm" class="space-y-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <label class="block text-sm font-medium">الاسم</label>
+        <input
+          type="text"
+          [(ngModel)]="contactDetails.name"
+          name="name"
+          class="mt-1 w-full rounded border px-3 py-2 focus:ring-2 focus:ring-blue-500"
+          placeholder="ادخل الاسم"
+          required
+        />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium">رقم الهاتف</label>
+        <input
+          type="text"
+          [(ngModel)]="contactDetails.phoneNumber"
+          name="phoneNumber"
+          class="mt-1 w-full rounded border px-3 py-2 focus:ring-2 focus:ring-blue-500"
+          placeholder="ادخل الهاتف"
+          required
+        />
+      </div>
+
+      <div class="md:col-span-2">
+        <label class="block text-sm font-medium">العنوان</label>
+        <input
+          type="text"
+          [(ngModel)]="contactDetails.address"
+          name="address"
+          class="mt-1 w-full rounded border px-3 py-2 focus:ring-2 focus:ring-blue-500"
+          placeholder="ادخل العنوان"
+          required
+        />
+      </div>
+
+      <div class="md:col-span-2">
+        <label class="block text-sm font-medium">ملاحظات إضافية</label>
+        <textarea
+          rows="3"
+          [(ngModel)]="contactDetails.additionalInfo"
+          name="additionalInfo"
+          class="mt-1 w-full rounded border px-3 py-2 focus:ring-2 focus:ring-blue-500"
+          placeholder="اكتب ملاحظات..."
+        ></textarea>
+      </div>
+    </div>
+
+    <!-- تفاصيل الطلب -->
+    @if (items.length > 0) {
+      <div class="mt-6">
+        <h2 class="text-xl font-semibold mb-2">تفاصيل الطلب</h2>
+
+        @for (item of items; track $index) {
+          <div class="flex items-center justify-between mb-2 p-3 border rounded">
+            <span class="font-medium">
+              {{ item?.name }}
+            </span>
+            <span>الكمية: {{ item.quantity ? item.quantity : 1 }}</span>
+            <span class="font-semibold">{{ item.price * 1 }} ج.م</span>
+          </div>
+        }
+      </div>
+    }
+
+    <!-- الباكدجات -->
+    @if (packages.length > 0) {
+      <div class="mt-6">
+        <h2 class="text-xl font-semibold mb-2">العروض / الباكدجات</h2>
+
+        @for (pkg of packages; track $index) {
+          <div class="mb-3 p-3 border rounded">
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-medium">باكدج رقم {{ pkg.id }}</span>
+              <span class="font-semibold">{{ pkg.name }} ج.م</span>
+            </div>
+
+            <div class="pl-4 border-t pt-2 text-sm text-gray-700">
+              <p class="font-semibold mb-1">محتويات الباكدج:</p>
+              @for (subItem of pkg.items; track $index) {
+                <div class="flex justify-between">
+                  <span>{{ subItem.name }}</span>
+                  <span>الكمية: {{ subItem.count }}</span>
+                </div>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    }
+
+    <!-- الإجمالي -->
+    <div class="text-right font-semibold mt-4 text-lg">
+      الإجمالي: {{ total }} ج.م
+    </div>
+
+    <!-- زر تأكيد -->
+    <button
+      type="submit"
+      class="px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700 mt-6"
+    >
+      تأكيد الطلب
+    </button>
+  </form>
+</div>

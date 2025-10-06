@@ -4,6 +4,7 @@ import { AboutComponent } from './Pages/about/about.component';
 import { ContactUsComponent } from './Pages/contact-us/contact-us.component';
 import { SubscriptionComponent } from './Pages/subscription/subscription.component';
 import { GlobalMenuComponent } from './Pages/global-menu/global-menu.component';
+import { OrderPageComponent } from './Pages/order-page/order-page.component';
 
 export const routes: Routes = [
     {
@@ -25,5 +26,9 @@ export const routes: Routes = [
     {
         path: 'menu', 
         component: GlobalMenuComponent
+    }, 
+    {
+        path: 'confirm-order', 
+        component: OrderPageComponent
     }, 
 ];

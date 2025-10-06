@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as AOS from 'aos';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SubscriptionService } from '../../Services/subscription.service';
 
 interface MenuItem {
@@ -44,8 +44,9 @@ export class SubscriptionComponent implements OnInit {
   totalPrice: number = 0;
   constructor(
     private route: ActivatedRoute,
-    private subscriptionService: SubscriptionService
-  ) {}
+    private subscriptionService: SubscriptionService,
+    private router: Router
+  ) { }
 
   categories: Category[] = [];
 
@@ -122,7 +123,6 @@ export class SubscriptionComponent implements OnInit {
   }
 
   updateSelectedItems(): void {
-    debugger;
     this.selectedItems = [];
 
     this.packageData.sections.forEach((section: any) => {
@@ -170,7 +170,9 @@ export class SubscriptionComponent implements OnInit {
   }
 
   confirmOrder(): void {
+    debugger;
     if (!this.isAllCategoriesComplete()) {
+      console.log(this.selectedItems)
       alert('يرجى اختيار جميع الأصناف المتاحة في كل فئة قبل تأكيد الاشتراك.');
       return;
     }
@@ -179,11 +181,28 @@ export class SubscriptionComponent implements OnInit {
       alert('يرجى اختيار الأصناف أولاً');
       return;
     }
-    console.log('Order confirmed:', this.selectedItems);
-    alert(
-      `تم تأكيد الاشتراك "${this.subscriptionName}" الإجمالي: ${this.totalPrice} ريال`
-    );
+
+    let packageData: any = {};
+    packageData.name = this.packageData?.price;
+    packageData.id = this.packageId;
+    packageData.items = this.selectedItems;
+    let containPackage: any = JSON.parse(window.localStorage.getItem('package') || '');
+    if (containPackage != 'null' && containPackage) {
+      containPackage.map((pack:any)=>{
+        if(pack.id != packageData.id) {
+          containPackage.push(packageData)
+        }
+      })
+    }
+
+    window.localStorage.setItem('package', JSON.stringify([packageData]))
     
+    this.router.navigate(['/confirm-order'])
+
+    // alert(
+    //   `تم تأكيد الاشتراك "${this.subscriptionName}" الإجمالي: ${this.totalPrice} ريال`
+    // );
+
   }
 
   resetSelection(): void {

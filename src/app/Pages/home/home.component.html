@@ -33,10 +33,10 @@
           <span>{{ package.price }} </span>
         </p>       
           @for(section of package.sections; track section.id ; let j = $index) {
-          <h3>{{ section.name }}</h3>
+          <h3 class="text-[rgb(41 43 39)]">{{ section.name }}</h3>
           <ul>
             @for(addon of section.addons; track addon.id ; let k = $index) {
-            <li>{{ addon.recipeName }}</li>
+            <li class="text-[#4f4e4e]">{{ addon.recipeName }}</li>
             }
           </ul>
           }

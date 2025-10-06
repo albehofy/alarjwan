@@ -25,7 +25,7 @@
             <a [routerLink]="['/menu']"> قائمة الطعام </a>
           </li>
           <li class="link-holder">
-            <a [routerLink]="['/subscription']"> الباقات </a>
+            <a [routerLink]="['/contact-us']"> تواصل معنا </a>
           </li>
         </ul>
       </div>
@@ -33,10 +33,10 @@
 
     <header class="header">
       <h1 data-aos="zoom-in-up" class="Effra_Rg">
-        طعام يروي القلب. <br />
-        صُنع بكل حبٍ وعناية!
+       {{header}} <br />
+        {{title}}
       </h1>
-      <h2 class="Effra_Rg">استمتع بكل قضمة</h2>
+      <h2 class="Effra_Rg">{{description}}</h2>
     </header>
   </div>
   <div class="bg">

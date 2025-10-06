@@ -1,198 +1,98 @@
 <!-- Header -->
-<div
-  id="cuisine-header"
-  class="bg-[#637359] py-16 text-center bg-cover bg-center"
-  [style.background-image]="cuisineBgImage"
->
+<div id="cuisine-header" class="bg-[#637359] py-16 text-center bg-cover bg-center"
+  [style.background-image]="cuisineBgImage">
   <h1 class="text-5xl font-bold text-white mb-4">{{ cuisineTitle }}</h1>
-  <p class="text-xl text-white max-w-2xl mx-auto">{{ cuisineSubtitle }}</p>
+  <p class="text-xl text-white max-w-2xl mx-auto"> استمتع باشهي الاطعمة من {{ cuisineTitle }}</p>
 </div>
 
 <!-- Main Content -->
 <div class="container mx-auto px-4 py-12">
   <!-- Cuisine Slider -->
   <div class="relative mb-12">
-    <div
-      class="flex overflow-x-auto pb-4 px-2 gap-6"
-      style="scrollbar-width: none"
-    >
-      <ng-container
-        *ngFor="
-          let cuisine of [
-            {
-              name: 'العربية',
-              image: 'http://static.photos/food/1200x630/401',
-              thumb: 'http://static.photos/food/640x360/301'
-            },
-            {
-              name: 'التركية',
-              image: 'http://static.photos/food/1200x630/402',
-              thumb: 'http://static.photos/food/640x360/302'
-            },
-            {
-              name: 'الإيطالية',
-              image: 'http://static.photos/food/1200x630/403',
-              thumb: 'http://static.photos/food/640x360/303'
-            },
-            {
-              name: 'الهندية',
-              image: 'http://static.photos/food/1200x630/404',
-              thumb: 'http://static.photos/food/640x360/304'
-            },
-            {
-              name: 'اليابانية',
-              image: 'http://static.photos/food/1200x630/405',
-              thumb: 'http://static.photos/food/640x360/305'
-            }
-          ]
-        "
-      >
-        <div
-          (click)="updateCuisineHeader(cuisine.name, cuisine.image)"
-          class="flex-shrink-0 w-48 h-48 rounded-xl overflow-hidden shadow-md relative group cursor-pointer"
-        >
-          <img
-            [src]="cuisine.thumb"
-            [alt]="cuisine.name"
-            class="w-full h-full object-cover"
-          />
+    <div class="flex overflow-x-auto pb-4 px-2 gap-6" style="scrollbar-width: none">
+      @for (cuisine of menuData; track cuisine.name) {
+        <div (click)="updateCuisineHeader(cuisine.name, cuisine.image)"
+          class="flex-shrink-0 w-48 h-48 rounded-xl overflow-hidden shadow-md relative group cursor-pointer">
+          <img [src]="cuisine.thumb" [alt]="cuisine.name" class="w-full h-full object-cover" />
           <div
-            class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center group-hover:bg-opacity-60 transition"
-          >
+            class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center group-hover:bg-opacity-60 transition">
             <span class="text-white text-xl font-bold">{{ cuisine.name }}</span>
           </div>
         </div>
-      </ng-container>
+      }
     </div>
   </div>
 
   <!-- Dishes Grid -->
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-    <ng-container
-      *ngFor="
-        let dish of [
-          {
-            name: 'حمص',
-            desc: 'غمسة حمص كريمية مع الطحينة، الليمون والثوم.',
-            img: 'http://static.photos/food/640x360/101',
-            price: 8.99
-          },
-          {
-            name: 'فلافل',
-            desc: 'كرات حمص مقرمشة مع الأعشاب والتوابل.',
-            img: 'http://static.photos/food/640x360/102',
-            price: 10.99
-          },
-          {
-            name: 'شاورما',
-            desc: 'لحم متبل مطبوخ على سيخ عمودي.',
-            img: 'http://static.photos/food/640x360/103',
-            price: 12.99
-          },
-          {
-            name: 'كباب أضنة',
-            desc: 'لحم مفروم حار مشوي على أسياخ.',
-            img: 'http://static.photos/food/640x360/104',
-            price: 14.99
-          },
-          {
-            name: 'بقلاوة',
-            desc: 'حلويات مصنوعة من طبقات عجينة الفيلو محشوة بالمكسرات.',
-            img: 'http://static.photos/food/640x360/105',
-            price: 6.99
-          },
-          {
-            name: 'لحم بعجين',
-            desc: 'بيتزا تركية مع طبقة من اللحم المفروم.',
-            img: 'http://static.photos/food/640x360/106',
-            price: 9.99
+
+    @for(section of categories; track section.id ; let i = $index) {
+      
+      <section class="category-card bg-white rounded-lg shadow-md p-6" data-aos="fade-up" [attr.data-aos-delay]="i * 100">
+        <header class="border-b border-gray-200 pb-4 mb-6">
+          <h3 class="text-2xl font-bold text-gray-900">{{ section.name }}</h3>
+          <p class="mt-1 text-gray-600">{{ section.description }}</p>
+        </header>
+        <div class=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          @for(dish of section.dishes; track dish.id) {
+            <div (click)="openDishModal(dish)"
+              class="bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300 hover:scale-105 cursor-pointer"
+              data-aos="fade-up">
+              <div class="relative h-56 overflow-hidden group">
+                <img [src]="dish.img" [alt]="dish.name" class="w-full h-full object-cover" />
+                <div
+                  class="dish-overlay absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-all duration-300">
+                  <span class="text-white font-semibold text-lg">عرض التفاصيل</span>
+                </div>
+              </div>
+              <div class="p-5">
+                <h3 class="text-xl font-bold text-gray-800 mb-2">{{ dish.name }}</h3>
+                <p class="text-gray-600 mb-4">{{ dish.desc }}</p>
+                <div class="flex justify-between items-center">
+                  <span class="text-[#637359] font-bold">${{ dish.price.toFixed(2) }}</span>
+                  <button (click)="addToOrder(dish.id,dish.name,dish.quantity,dish.price); $event.stopPropagation()"
+                    class="px-4 py-2 bg-[#637359] text-white rounded-lg hover:bg-[#4a5a40] transition">
+                    أضف للطلب
+                  </button>
+                </div>
+              </div>
+            </div>
           }
-        ]
-      "
-    >
-      <div
-        (click)="openDishModal(dish)"
-        class="bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300 hover:scale-105 cursor-pointer"
-        data-aos="fade-up"
-      >
-        <div class="relative h-56 overflow-hidden group">
-          <img
-            [src]="dish.img"
-            [alt]="dish.name"
-            class="w-full h-full object-cover"
-          />
-          <div
-            class="dish-overlay absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-all duration-300"
-          >
-            <span class="text-white font-semibold text-lg">عرض التفاصيل</span>
-          </div>
         </div>
-        <div class="p-5">
-          <h3 class="text-xl font-bold text-gray-800 mb-2">{{ dish.name }}</h3>
-          <p class="text-gray-600 mb-4">{{ dish.desc }}</p>
-          <div class="flex justify-between items-center">
-            <span class="text-[#637359] font-bold"
-              >${{ dish.price.toFixed(2) }}</span
-            >
-            <button
-              (click)="
-                addToOrder(dish.name, dish.price); $event.stopPropagation()
-              "
-              class="px-4 py-2 bg-[#637359] text-white rounded-lg hover:bg-[#4a5a40] transition"
-            >
-              أضف للطلب
-            </button>
-          </div>
-        </div>
-      </div>
-    </ng-container>
-  </div>
+      </section>
+    }
+  
 </div>
+
+
 
 <!-- Cart Button -->
 <div class="fixed bottom-6 right-6 z-40">
-  <button
-    (click)="viewCart()"
-    class="relative p-4 bg-[#637359] text-white rounded-full shadow-lg hover:bg-[#4a5a40] transition flex items-center justify-center w-14 h-14"
-  >
+  <button (click)="viewCart()"
+    class="relative p-4 bg-[#637359] text-white rounded-full shadow-lg hover:bg-[#4a5a40] transition flex items-center justify-center w-14 h-14">
     <i class="fas fa-shopping-cart text-xl"></i>
 
     <!-- Badge -->
-    <span
-      *ngIf="cartItems.length > 0"
-      class="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded-full shadow"
-    >
+    <span *ngIf="cartItems.length > 0"
+      class="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded-full shadow">
       {{ cartItems.length }}
     </span>
   </button>
 </div>
 
 <!-- Cart Modal -->
-<div
-  *ngIf="showCart"
-  class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
->
+<div *ngIf="showCart" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
   <div class="bg-white rounded-xl p-6 w-full max-w-md">
     <h2 class="text-2xl font-bold text-[#637359] mb-4">سلة التسوق</h2>
     <div class="mb-4 max-h-60 overflow-y-auto scrollbar-hide">
-      <div
-        *ngFor="let item of cartItems; let i = index"
-        class="flex justify-between items-center gap-2"
-        [ngClass]="{
+      <div *ngFor="let item of cartItems; let i = index" class="flex justify-between items-center gap-2" [ngClass]="{
           'border-b py-3': i < cartItems.length - 1,
           'pt-3': i === cartItems.length - 1
-        }"
-      >
+        }">
         <div class="flex-1">
           <span class="block font-medium text-gray-800">{{ item.name }}</span>
-          <span class="text-sm text-gray-600"
-            >{{ item.price.toFixed(2) }} $</span
-          >
+          <span class="text-sm text-gray-600">{{ item.price?.toFixed(2) }} $</span>
         </div>
-        <button
-          (click)="removeFromCart(i)"
-          class="text-red-600 hover:text-red-800 transition text-sm font-bold px-2"
-        >
+        <button (click)="removeFromCart(i)" class="text-red-600 hover:text-red-800 transition text-sm font-bold px-2">
           حذف
         </button>
       </div>
@@ -203,16 +103,12 @@
       </p>
     </div>
     <div class="flex justify-between mt-6">
-      <button
-        (click)="closeCartModal()"
-        class="px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400 transition"
-      >
+      <button (click)="closeCartModal()"
+        class="px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400 transition">
         إغلاق
       </button>
-      <button
-        (click)="proceedToCheckout()"
-        class="px-4 py-2 bg-[#637359] text-white rounded-lg hover:bg-[#4a5a40] transition"
-      >
+      <button (click)="proceedToCheckout()"
+        class="px-4 py-2 bg-[#637359] text-white rounded-lg hover:bg-[#4a5a40] transition">
         إتمام الطلب
       </button>
     </div>
@@ -220,22 +116,12 @@
 </div>
 
 <!-- Dish Detail Modal -->
-<div
-  *ngIf="showDishModal"
-  class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
->
+<div *ngIf="showDishModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
   <div class="bg-white rounded-xl p-6 w-[87%] max-w-md relative">
-    <button
-      (click)="closeDishModal()"
-      class="absolute close-modal text-gray-600 hover:text-gray-900 text-xl font-bold"
-    >
+    <button (click)="closeDishModal()" class="absolute close-modal text-gray-600 hover:text-gray-900 text-xl font-bold">
       &times;
     </button>
-    <img
-      [src]="selectedDish?.img"
-      [alt]="selectedDish?.name"
-      class="w-full h-48 object-cover rounded-lg mb-4"
-    />
+    <img [src]="selectedDish?.img" [alt]="selectedDish?.name" class="w-full h-48 object-cover rounded-lg mb-4" />
     <h2 class="text-2xl font-bold text-[#637359] mb-2">
       {{ selectedDish?.name }}
     </h2>
@@ -243,12 +129,9 @@
     <p class="text-lg font-bold text-[#637359] mb-6">
       السعر: {{ selectedDish?.price?.toFixed(2) }} $
     </p>
-    <button
-      (click)="
-        addToOrder(selectedDish?.name!, selectedDish?.price!); closeDishModal()
-      "
-      class="w-full px-4 py-2 bg-[#637359] text-white rounded-lg hover:bg-[#4a5a40] transition"
-    >
+    <button (click)="
+        addToOrder(selectedDish?.id, selectedDish?.name, selectedDish?.quantity, selectedDish?.price); closeDishModal()
+      " class="w-full px-4 py-2 bg-[#637359] text-white rounded-lg hover:bg-[#4a5a40] transition">
       أضف للطلب
     </button>
   </div>

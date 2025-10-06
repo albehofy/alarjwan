@@ -1,10 +1,13 @@
 import { MenuService } from './../../Services/menu.service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 interface CartItem {
   name: string;
-  price: number;
+  id: string;
+  quantity:number, 
+  price?:number;
 }
 
 interface Dish {
@@ -12,6 +15,8 @@ interface Dish {
   desc: string;
   img: string;
   price: number;
+  id: number , 
+  quantity:number,
 }
 
 @Component({
@@ -35,26 +40,54 @@ export class GlobalMenuComponent implements OnInit {
   showDishModal: boolean = false;
 
   menuData: any[] = [];
-
-     constructor(
-    private MenuService: MenuService
+  dishes: Dish[] = [];
+  categories: any = []
+  constructor(
+    private MenuService: MenuService,
+    private router: Router
   ) { }
+
+  AllLists: Array<any> = []
 
   ngOnInit(): void {
     this.loadCartFromStorage();
     this.loadAllMenuData();
   }
-  loadAllMenuData(): void {
-      this.MenuService.getAllMenuData().subscribe({
-      next: (data) => {
-        console.log('Packages loaded:', data);
-        this.menuData = data;
-      },
-      error: (err: any) => {
-        console.error('Error loading packages:', err);
-      }
-    });
-  }
+loadAllMenuData(): void {
+  this.MenuService.getAllMenuData().subscribe({
+    next: (data) => {
+      this.categories = data.flatMap((menu: any) =>
+        menu.menu.map((cat: any) => ({
+          id: cat.id ?? '0',
+          name: cat.name,
+          description: cat.description,
+          dishes: cat.items.map((dish: any) => ({
+            id: dish.id ?? '0',
+            name: dish.name,
+            desc: dish.description,
+            img: dish.image,
+            price: dish.price
+          }))
+        }))
+      );
+
+      // save for slider
+      this.menuData = data.map((menu: any) => ({
+        name: menu.menuName,
+        image: menu.image,
+        thumb: menu.image
+      }));
+
+      console.log('Packages loaded:', this.categories);
+      this.cuisineTitle = this.menuData[0].name;
+      this.cuisineBgImage= this.menuData[0].iamge
+    },
+    error: (err: any) => {
+      console.error('Error loading packages:', err);
+    }
+  });
+}
+
 
   updateCuisineHeader(name: string, imageUrl: string): void {
     this.cuisineTitle = `مأكولات ${name}`;
@@ -62,8 +95,8 @@ export class GlobalMenuComponent implements OnInit {
     this.cuisineBgImage = `linear-gradient(rgba(99, 115, 89, 0.8), rgba(99, 115, 89, 0.8)), url('${imageUrl}')`;
   }
 
-  addToOrder(name: string, price: number): void {
-    this.cartItems.push({ name, price });
+  addToOrder(id: any, name:any ,quantity: any, price:any): void {
+    this.cartItems.push({ name:name, id:id,quantity:1,price:price });
     this.updateCartStorage();
     this.showCart = true;
   }
@@ -79,7 +112,8 @@ export class GlobalMenuComponent implements OnInit {
   proceedToCheckout(): void {
     localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
     localStorage.setItem('cartTotal', this.cartTotal.toString());
-    window.location.href = 'checkout.html';
+    // window.location.href = 'checkout.html';
+    this.router.navigate(['/confirm-order'])
   }
 
   // 🆕 Remove item from cart
@@ -95,8 +129,9 @@ export class GlobalMenuComponent implements OnInit {
 
   // 📦 Save cart state
   private updateCartStorage(): void {
+    debugger;
     localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
-    this.cartTotal = this.cartItems.reduce((sum, item) => sum + item.price, 0);
+    this.cartTotal = this.cartItems.reduce((sum, item) => sum + (item.price||0), 0);
     localStorage.setItem('cartTotal', this.cartTotal.toString());
   }
 

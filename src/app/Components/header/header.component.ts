@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
 import * as AOS from 'aos';
 import { RouterLink } from '@angular/router';
-
+import { HomeComponentService } from '../../Services/home.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -10,15 +10,12 @@ import { RouterLink } from '@angular/router';
   imports: [RouterLink],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
+  header = '';
+  description = '';
+  title = '';
+  
   images = [
     { name: 'image', src: 'assets/images/header1.png' },
-    { name: 'image', src: 'assets/images/header2.png' },
-    { name: 'image', src: 'assets/images/header1.png' },
-    { name: 'image', src: 'assets/images/header2.png' },
-    { name: 'image', src: 'assets/images/header1.png' },
-    { name: 'image', src: 'assets/images/header2.png' },
-    { name: 'image', src: 'assets/images/header1.png' },
-    { name: 'image', src: 'assets/images/header2.png' },
   ];
 
   image = this.images[0];
@@ -28,7 +25,23 @@ export class HeaderComponent implements OnInit, OnDestroy {
   subscription!: Subscription;
   index = 0;
 
+
+
+  private homeService = inject(HomeComponentService)
+
   ngOnInit() {
+    this.homeService.getHomeData().subscribe({
+      next: (res) => {
+        console.log(res)
+        this.header = res.header;
+        this.description = res.description;
+        this.title = res.title
+        this.images = res.images.map((img: string, index: number = 0) => ({
+          name: `image ${++index} for slider`,
+          src: img
+        }))
+      }
+    })
     this.subscription = interval(4000).subscribe(() => {
       this.previousImage = JSON.parse(JSON.stringify(this.image));
       this.index++;
