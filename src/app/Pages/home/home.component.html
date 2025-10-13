@@ -1,6 +1,6 @@
 <div style="overflow: hidden">
   <!-- Header -->
-  <app-header />
+  <app-header (scrollToSection)="scrollToSection($event)" />
   <!-- Seprator -->
   <app-separator
     [header]="'اختر من باقاتنا المميزة'"
@@ -13,41 +13,43 @@
   />
 
   <!-- Subscriptions -->
-  @for(package of packages; track package.id ; let i = $index) {
-  <div class="subscriptions" [dir]="(i + 2) % 2 === 0 ? 'ltr' : 'rtl'">
-    <div class="subscription" data-aos="fade-up" data-aos-duration="600">
-      <div
-        class="subscription-img"
-        data-aos="fade-up-left"
-        data-aos-duration="500"
-      >
-        <img [src]="package.image" alt="package image" />
-      </div>
-      <div class="subscription-data" dir="ltr">
-        <h2 class="header">{{ package.name }}</h2>
-        <p>
-          {{ package.details }}
-        </p>
-        <p class="price flex space-x-2">
-          <img class="w-6 h-6" src="assets/images/riyal.png" alt="sar" />
-          <span>{{ package.price }} </span>
-        </p>       
-          @for(section of package.sections; track section.id ; let j = $index) {
-          <h3 class="text-[rgb(41 43 39)]">{{ section.name }}</h3>
-          <ul>
-            @for(addon of section.addons; track addon.id ; let k = $index) {
-            <li class="text-[#4f4e4e]">{{ addon.recipeName }}</li>
-            }
-          </ul>
-          }
-      
-        <button class="subscribe-btn" [routerLink]="['/subscription' , package.id]">
-          اطلب الآن
-        </button>
-      </div>
-    </div>
-  </div>
-  }
+   <div id="subscriptions">
+     @for(package of packages; track package.id ; let i = $index) {
+     <div class="subscriptions" [dir]="(i + 2) % 2 === 0 ? 'ltr' : 'rtl'">
+       <div class="subscription" data-aos="fade-up" data-aos-duration="600">
+         <div
+           class="subscription-img"
+           data-aos="fade-up-left"
+           data-aos-duration="500"
+         >
+           <img [src]="package.image" alt="package image" />
+         </div>
+         <div class="subscription-data" dir="ltr">
+           <h2 class="header">{{ package.name }}</h2>
+           <p>
+             {{ package.details }}
+           </p>
+           <p class="price flex space-x-2">
+             <img class="w-6 h-6" src="assets/images/riyal.png" alt="sar" />
+             <span>{{ package.price }} </span>
+           </p>       
+             @for(section of package.sections; track section.id ; let j = $index) {
+             <h3 class="text-[rgb(41 43 39)]">{{ section.name }}</h3>
+             <ul>
+               @for(addon of section.addons; track addon.id ; let k = $index) {
+               <li class="text-[#4f4e4e]">{{ addon.recipeName }}</li>
+               }
+             </ul>
+             }
+         
+           <button class="subscribe-btn" [routerLink]="['/subscription' , package.id]">
+             اطلب الآن
+           </button>
+         </div>
+       </div>
+     </div>
+     }
+   </div>
 
   <!-- contact -->
 </div>

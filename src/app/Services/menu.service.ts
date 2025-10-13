@@ -19,8 +19,14 @@ export class MenuService {
     requestOrder(data:any): Observable<any> {
       return this.http.post<any>(`${this.apiBaseUrl}/api/Orders`,data);
     }
+
+    requestPackge(data:any): Observable<any> {
+      return this.http.post<any>(`${this.apiBaseUrl}/api/PaidPackages`,data);
+    }
     // getAllMenuData(): Observable<any> {
     //   return this.http.get<any>(`${this.apiBaseUrl}${this.apiUrl}`);
     // }
+
+    
     
 }

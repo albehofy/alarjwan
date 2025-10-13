@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject, Output, EventEmitter } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
 import * as AOS from 'aos';
 import { RouterLink } from '@angular/router';
@@ -82,5 +82,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   toggleNavbar() {
     const navbar = document.querySelector('.navbar');
     navbar?.classList.toggle('active');
+  }
+
+  @Output() scrollToSection = new EventEmitter<string>();
+
+  scroll(sectionId: string) {
+    this.scrollToSection.emit(sectionId);
   }
 }

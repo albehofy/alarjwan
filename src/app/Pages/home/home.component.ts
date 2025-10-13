@@ -36,4 +36,14 @@ export class HomeComponent  {
       }
     });
   }
+
+
+  scrollToSection(sectionId: string) {
+  const el = document.getElementById(sectionId);
+  if (el) {
+    const yOffset = -80; // optional offset for fixed header
+    const y = el.getBoundingClientRect().top + window.scrollY + yOffset;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  }
+}
 }

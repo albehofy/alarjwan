@@ -3,9 +3,10 @@ declare var AOS: any;
 declare var feather: any;
 import { FormsModule } from '@angular/forms';
 import { ContactUsComponentService } from '../../Services/conact-us.service';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-contact-us',
-  imports: [FormsModule],
+  imports: [FormsModule,RouterLink],
   templateUrl: './contact-us.component.html',
   styleUrl: './contact-us.component.scss',
 })

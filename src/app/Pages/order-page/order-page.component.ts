@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { MenuService } from '../../Services/menu.service';
 
 interface ContactDetails {
-  id:string
+  id: string
   name: string;
   address: string;
   additionalInfo: string;
@@ -38,7 +38,7 @@ interface Package {
 })
 export class OrderPageComponent implements OnInit {
   contactDetails: ContactDetails = {
-    id:'0',
+    id: '0',
     name: '',
     address: '',
     additionalInfo: '',
@@ -60,7 +60,7 @@ export class OrderPageComponent implements OnInit {
     this.packages = savedPackages ? JSON.parse(savedPackages) : [];
   }
 
-  constructor(private menuServ:MenuService){}
+  constructor(private menuServ: MenuService) { }
 
   getItemName(menuItemId: number): string {
     const item = this.menuItems.find(m => m.id === menuItemId);
@@ -90,17 +90,40 @@ export class OrderPageComponent implements OnInit {
     console.log(this.contactDetails)
     console.log(this.menuItems)
     console.log(this.packages)
-    debugger;
-    if(this.menuItems) {
-      let resutl = this.menuItems.map((item:any)=>{
+    if(!this.contactDetails.name && !this.contactDetails.phoneNumber && !this.contactDetails.address) {
+      alert('برجاء اكمال البيانات والمحاولة مرة اخرى'); 
+      return;
+    }
+    // if (this.menuItems.length > 0 ) {
+    //   let resutl = this.menuItems.map((item: any) => {
+    //     return {
+    //       menuItemId: item.id,
+    //       quantity: item.quantity
+    //     }
+    //   })
+    //   this.menuServ.requestOrder({ contactDetails: this.contactDetails, items: resutl }).subscribe({
+    //     next: res => {
+    //       localStorage.removeItem('cartItems');
+    //     }
+    //   })
+    // }
+    if (this.packages.length > 0) {
+      let resutl = this.packages.map((item: any) => {
         return {
-          menuItemId:item.id,
-          quantity:item.quantity
+          packageId: item.id,
+          selectedAddonIds: item.items.map((addons: any) => {
+            return {
+              addonId: addons.id,
+              count: addons.count
+            }
+          })
         }
       })
-      this.menuServ.requestOrder({contactDetails:this.contactDetails,items:resutl}).subscribe({
-        next:res=>{
-          console.log(res)
+
+      this.menuServ.requestPackge({ contactDetails: this.contactDetails, Packages: resutl }).subscribe({
+        next: res => {
+          localStorage.removeItem('package');
+          alert('تم إرسال الطلب!');
         }
       })
     }
@@ -111,6 +134,6 @@ export class OrderPageComponent implements OnInit {
     //   packages: this.packages,
     // };
     // console.log('Order payload:', payload);
-    alert('تم إرسال الطلب!');
+    
   }
 }

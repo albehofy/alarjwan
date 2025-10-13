@@ -1,3 +1,12 @@
+<!-- Back Button -->
+<div class="container mx-auto px-4 py-4 flex items-center justify-end">
+  <button
+    [routerLink]="['/']"
+    class="inline-flex w-[max-content] items-center gap-2 text-[#637359] font-semibold hover:text-[#4a5a40] transition">
+    <span>العودة للرئيسية</span>
+    <i class="fas fa-arrow-left text-lg"></i>
+  </button>
+</div>
 <div>
   <!-- Header / Subscription Info -->
   <header class="bg-[#637359] py-8 text-center text-white" data-aos="fade-down">
@@ -158,12 +167,12 @@
           </div>
 
           <!-- Warning message if not all categories complete -->
-          <div
+          <!-- <div
             *ngIf="!isAllCategoriesComplete()"
             class="mb-4 text-red-600 font-semibold"
           >
             يرجى اختيار جميع الأصناف المتاحة في كل فئة قبل تأكيد الاشتراك.
-          </div>
+          </div> -->
 
           <div class="border-t pt-4 flex justify-between items-center">
             <div class="text-lg font-bold">
@@ -173,7 +182,7 @@
             <button
               class="px-4 py-2 bg-[#637359] text-white rounded-lg hover:bg-[#4a5a40]"
               (click)="confirmOrder(); resetSelection()"
-              [disabled]="!isAllCategoriesComplete()"
+              
             >
               تأكيد الاشتراك
             </button>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as AOS from 'aos';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { SubscriptionService } from '../../Services/subscription.service';
 
 interface MenuItem {
@@ -32,7 +32,7 @@ interface SelectedItem {
 @Component({
   selector: 'app-subscription',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,RouterLink],
   templateUrl: './subscription.component.html',
   styleUrls: ['./subscription.component.scss'],
 })
@@ -169,41 +169,35 @@ export class SubscriptionComponent implements OnInit {
     });
   }
 
-  confirmOrder(): void {
-    debugger;
-    if (!this.isAllCategoriesComplete()) {
-      console.log(this.selectedItems)
-      alert('يرجى اختيار جميع الأصناف المتاحة في كل فئة قبل تأكيد الاشتراك.');
-      return;
-    }
+confirmOrder(): void {
+  // if (!this.isAllCategoriesComplete()) {
+  //   alert('يرجى اختيار جميع الأصناف المتاحة في كل فئة قبل تأكيد الاشتراك.');
+  //   return;
+  // }
 
-    if (this.selectedItems.length === 0) {
-      alert('يرجى اختيار الأصناف أولاً');
-      return;
-    }
-
-    let packageData: any = {};
-    packageData.name = this.packageData?.price;
-    packageData.id = this.packageId;
-    packageData.items = this.selectedItems;
-    let containPackage: any = JSON.parse(window.localStorage.getItem('package') || '');
-    if (containPackage != 'null' && containPackage) {
-      containPackage.map((pack:any)=>{
-        if(pack.id != packageData.id) {
-          containPackage.push(packageData)
-        }
-      })
-    }
-
-    window.localStorage.setItem('package', JSON.stringify([packageData]))
-    
-    this.router.navigate(['/confirm-order'])
-
-    // alert(
-    //   `تم تأكيد الاشتراك "${this.subscriptionName}" الإجمالي: ${this.totalPrice} ريال`
-    // );
-
+  if (this.selectedItems.length === 0) {
+    alert('يرجى اختيار الأصناف أولاً');
+    return;
   }
+
+  const packageData = {
+    name: this.packageData?.price,
+    id: this.packageId,
+    items: this.selectedItems
+  };
+
+  let containPackage = JSON.parse(localStorage.getItem('package') || '[]') || [];
+
+  if (!containPackage.some((p: any) => p.id === packageData.id)) {
+    containPackage.push(packageData);
+  }
+
+  localStorage.setItem('package', JSON.stringify(containPackage));
+
+  // ✅ this will now always run
+  this.router.navigate(['/confirm-order']);
+}
+
 
   resetSelection(): void {
     this.packageData.sections.forEach((section: any) => {
