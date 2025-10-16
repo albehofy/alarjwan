@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MenuService } from '../../Services/menu.service';
-
+import { Router, RouterLink } from '@angular/router';
 interface ContactDetails {
   id: string
   name: string;
@@ -33,7 +33,7 @@ interface Package {
 @Component({
   selector: 'app-order-page',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,RouterLink],
   templateUrl: './order-page.component.html',
 })
 export class OrderPageComponent implements OnInit {
@@ -60,7 +60,7 @@ export class OrderPageComponent implements OnInit {
     this.packages = savedPackages ? JSON.parse(savedPackages) : [];
   }
 
-  constructor(private menuServ: MenuService) { }
+  constructor(private menuServ: MenuService, private _routerServ:Router) { }
 
   getItemName(menuItemId: number): string {
     const item = this.menuItems.find(m => m.id === menuItemId);
@@ -124,6 +124,7 @@ export class OrderPageComponent implements OnInit {
         next: res => {
           localStorage.removeItem('package');
           alert('تم إرسال الطلب!');
+          this._routerServ.navigate(['/'])
         }
       })
     }
