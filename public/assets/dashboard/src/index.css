@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body {
+ 
+    direction: rtl;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* Hide scrollbar for webkit browsers (Chrome, Safari) but keep scrolling functionality */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    display: none;
+}
+
+.overflow-x-auto {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    /* IE and Edge */
+}
+
+.overflow-x-auto::-webkit-scrollbar {
+    display: none;
+}
+
+.overflow-y-auto {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    /* IE and Edge */
+}
+
+.overflow-y-auto::-webkit-scrollbar {
+    display: none;
+}
