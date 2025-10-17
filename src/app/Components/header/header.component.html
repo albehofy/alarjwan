@@ -2,13 +2,26 @@
   <div class="header-holder">
     <nav>
       <ul class="brand-info d-flex">
-        <li class="email flex-grow-1">{{ "info@alarjwan.com" }}</li>
+        <li class="email flex-grow-1">
+            <a
+                href="mailto:info@alarjwan.com"
+                class="lowercase"
+              >
+                {{ "info@alarjwan.com" }}
+              </a>
+        </li>
         <li class="social-media flex-grow-1">
           <a [href]="'https://www.tiktok.com/@alarjwan.r'" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
           <a [href]="'https://www.instagram.com/alarjwan.r'"><i class="fa-brands fa-instagram"></i></a>
         </li>
         <li class="address flex-grow-1">{{ "طريق عثمان بن عفان - الوادي - الرياض" }}</li>
-        <li class="phone flex-grow-1" dir="ltr">{{ "+966 55 367 8040" }}</li>
+        <li class="phone flex-grow-1" dir="ltr">
+            <a
+                href="tel:+966 55 367 8040"
+              >
+                +966 55 367 8040
+              </a>
+        </li>
       </ul>
       <div class="navbar d-flex">
         <a href="#" class="logo"
@@ -25,7 +38,7 @@
             <a [routerLink]="['/menu']"> قائمة الطعام </a>
           </li>
           <li class="link-holder">
-            <a href="javascript:void(0)" (click)="scroll('subscriptions')"> الباقات </a>
+            <a href="javascript:void(0)" (click)="scroll('subscriptions')"> باقات البوفيهات الخارجية </a>
           </li>
           <li class="link-holder">
             <a [routerLink]="['/contact-us']"> تواصل معنا </a>
