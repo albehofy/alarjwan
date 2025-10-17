@@ -5,30 +5,35 @@ import { ContactUsComponent } from './Pages/contact-us/contact-us.component';
 import { SubscriptionComponent } from './Pages/subscription/subscription.component';
 import { GlobalMenuComponent } from './Pages/global-menu/global-menu.component';
 import { OrderPageComponent } from './Pages/order-page/order-page.component';
+import { DashboardComponent } from './Pages/dashboard/dashboard.component';
 
 export const routes: Routes = [
-    {
-        path: '',
-        component: HomeComponent
-    }, 
-    {
-        path: 'about', 
-        component: AboutComponent
-    }, 
-    {
-        path: 'subscription/:id', 
-        component: SubscriptionComponent
-    },
-    {
-        path: 'contact-us', 
-        component: ContactUsComponent
-    }, 
-    {
-        path: 'menu', 
-        component: GlobalMenuComponent
-    }, 
-    {
-        path: 'confirm-order', 
-        component: OrderPageComponent
-    }, 
+  {
+    path: '',
+    component: HomeComponent,
+  },
+  {
+    path: 'about',
+    component: AboutComponent,
+  },
+  {
+    path: 'subscription/:id',
+    component: SubscriptionComponent,
+  },
+  {
+    path: 'contact-us',
+    component: ContactUsComponent,
+  },
+  {
+    path: 'menu',
+    component: GlobalMenuComponent,
+  },
+  {
+    path: 'confirm-order',
+    component: OrderPageComponent,
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+  },
 ];
