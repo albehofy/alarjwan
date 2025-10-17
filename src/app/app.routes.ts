@@ -13,38 +13,31 @@ export const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
-      {
-        path: '',
-        component: HomeComponent,
-      },
-      {
-        path: 'about',
-        component: AboutComponent,
-      },
-      {
-        path: 'subscription/:id',
-        component: SubscriptionComponent,
-      },
-      {
-        path: 'contact-us',
-        component: ContactUsComponent,
-      },
-      {
-        path: 'menu',
-        component: GlobalMenuComponent,
-      },
-      {
-        path: 'confirm-order',
-        component: OrderPageComponent,
-      }
-    ]
+      { path: '', component: HomeComponent },
+      { path: 'about', component: AboutComponent },
+      { path: 'subscription/:id', component: SubscriptionComponent },
+      { path: 'contact-us', component: ContactUsComponent },
+      { path: 'menu', component: GlobalMenuComponent },
+      { path: 'confirm-order', component: OrderPageComponent },
+    ],
   },
+
+  // 👇 This handles ALL React dashboard paths
   {
     path: 'dashboard',
     component: DashboardComponent,
+    children:[
+      {
+  path: '**',
+  component: DashboardComponent,
+},
+    ]
   },
   {
-    path: 'dashboard/**',
+    path: 'dashboard/**', // 👈 wildcard — anything under /dashboard will load React
     component: DashboardComponent,
   },
+
+  // Optional: fallback route
+  { path: '**', redirectTo: '' },
 ];

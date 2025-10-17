@@ -1,7 +1,6 @@
 <!-- Back Button -->
 <div class="container mx-auto px-4 py-4 flex items-center justify-end">
-  <button
-    [routerLink]="['/']"
+  <button [routerLink]="['/']"
     class="inline-flex w-[max-content] items-center gap-2 text-[#637359] font-semibold hover:text-[#4a5a40] transition">
     <span>العودة للرئيسية</span>
     <i class="fas fa-arrow-left text-lg"></i>
@@ -9,8 +8,7 @@
 </div>
 
 <!-- Header -->
-<div id="cuisine-header"
-  class="bg-[#637359] py-16 text-center bg-cover bg-center"
+<div id="cuisine-header" class="bg-[#637359] py-16 text-center bg-cover bg-center"
   [style.background-image]="cuisineBgImage">
   <h1 class="text-5xl font-bold text-white mb-4">{{ cuisineTitle }}</h1>
   <p class="text-xl text-white max-w-2xl mx-auto">
@@ -25,82 +23,74 @@
   <div class="relative mb-12">
     <div class="flex overflow-x-auto pb-4 px-2 gap-6" style="scrollbar-width: none">
       @for (cuisine of menuData; track cuisine.name) {
+      <div (click)="updateCuisineHeader(cuisine.name, cuisine.image)"
+        class="flex-shrink-0 w-48 h-48 rounded-xl overflow-hidden relative group cursor-pointer">
+        <img [src]="cuisine.thumb" [alt]="cuisine.name" class="w-full h-full object-cover" />
         <div
-          (click)="updateCuisineHeader(cuisine.name, cuisine.image)"
-          class="flex-shrink-0 w-48 h-48 rounded-xl overflow-hidden relative group cursor-pointer">
-          <img [src]="cuisine.thumb" [alt]="cuisine.name" class="w-full h-full object-cover" />
-          <div
-            class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center group-hover:bg-opacity-60 transition">
-            <span class="text-white text-xl font-bold">{{ cuisine.name }}</span>
-          </div>
+          class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center group-hover:bg-opacity-60 transition">
+          <span class="text-white text-xl font-bold">{{ cuisine.name }}</span>
         </div>
+      </div>
       }
     </div>
   </div>
 
   <!-- Sticky Category Navbar -->
-  <nav
-    class="sticky top-0 z-40 bg-white py-3 mb-8 overflow-x-auto whitespace-nowrap scrollbar-hide">
+  <nav class="sticky top-0 z-40 bg-white py-3 mb-8 overflow-x-auto whitespace-nowrap scrollbar-hide">
     <div class="container mx-auto flex gap-3 px-4 overflow-x-auto no-scrollbar scetions-container">
-  @for (section of categories; track $index) {
-    <button
-      (click)="scrollToSection(section.id)"
-      [class.bg-[#637359]]="activeSectionId === section.id"
-      [class.text-white]="activeSectionId === section.id"
-      [class.text-[#637359]]="activeSectionId !== section.id"
-      [class.bg-white]="activeSectionId !== section.id"
-      class="min-w-[60px] h-[60px] flex items-center justify-center font-semibold rounded-full border border-[#637359] hover:bg-[#637359] hover:text-white transition">
-      {{ section.name }}
-    </button>
-  }
-</div>
+      @for (section of categories; track $index) {
+      <button (click)="scrollToSection(section.id)" [class.bg-[#637359]]="activeSectionId === section.id"
+        [class.text-white]="activeSectionId === section.id" [class.text-[#637359]]="activeSectionId !== section.id"
+        [class.bg-white]="activeSectionId !== section.id"
+        class="min-w-[60px] h-[60px] flex items-center justify-center font-semibold rounded-full border border-[#637359] hover:bg-[#637359] hover:text-white transition">
+        {{ section.name }}
+      </button>
+      }
+    </div>
 
   </nav>
 
   <!-- Dishes Grid -->
   @for (section of categories; track section.id; let i = $index) {
-    <section
-      [id]="'section-' + section.id"
-      class="category-card bg-white rounded-lg p-6 mb-10 scroll-mt-32"
-      data-aos="fade-up"
-      [attr.data-aos-delay]="i * 100">
-      
-      <!-- Sticky Section Header -->
-      <header class="bg-white z-30  pb-5 mb-6">
-        <h3 class="text-2xl font-bold text-gray-900">{{ section.name }}</h3>
-        <p class="mt-1 text-gray-600">{{ section.description }}</p>
-      </header>
+  <section [id]="'section-' + section.id" class="category-card bg-white rounded-lg p-6 mb-10 scroll-mt-32"
+    data-aos="fade-up" [attr.data-aos-delay]="i * 100">
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        @for (dish of section.dishes; track dish.id) {
-          <div
-            (click)="openDishModal(dish)"
-            class="custom-border text-white rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105 cursor-pointer"
-            data-aos="fade-up">
-            
-            <div class="relative overflow-hidden group">
-              <div class="alarjwan-card">
-                <img src="/assets/images/alarjwan-pt.png" [alt]="dish.name" class="w-full h-full pattern" />
-                <img [src]="dish.img" [alt]="dish.name" class="w-full h-full object-cover item-img rounded-lg" />
-              </div>
-            </div>
+    <!-- Sticky Section Header -->
+    <header class="bg-white z-30  pb-5 mb-6">
+      <h3 class="text-2xl font-bold text-gray-900">{{ section.name }}</h3>
+      <p class="mt-1 text-gray-600">{{ section.description }}</p>
+    </header>
 
-            <div class="p-2 bg-white">
-              <h3 class="text-xl font-bold text-gray-800 mb-2 text-center">{{ dish.name }}</h3>
-              <p class="text-gray-600 mb-4 text-center">{{ dish.desc }}</p>
-              <div class="flex justify-center items-center text-center">
-                <span class="text-[#637359] font-bold text-center">${{ dish.price.toFixed(2) }}</span>
-                <!-- <button
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      @for (dish of section.dishes; track dish.id) {
+      <div (click)="openDishModal(dish)"
+        class="custom-border card-wrappere-relative  text-white rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105 cursor-pointer"
+        data-aos="fade-up">
+        <img src="/assets/images/alarjwan-pt.png" [alt]="dish.name" class="w-full h-full pattern" />
+
+        <div class="py-5">
+          <div class="alarjwan-card">
+            <img [src]="dish.img" [alt]="dish.name" class="w-full h-full object-cover item-img rounded-lg" />
+          </div>
+
+
+          <div class="p-2 bg-dark-white">
+            <h3 class="text-xl font-bold text-gray-800 mb-2 text-center">{{ dish.name }}</h3>
+            <p class="text-gray-600 mb-4 text-center">{{ dish.desc }}</p>
+            <div class="flex justify-center items-center text-center">
+              <span class="text-[#637359] font-bold text-center">${{ dish.price.toFixed(2) }}</span>
+              <!-- <button
                   (click)="addToOrder(dish.id, dish.name, dish.quantity, dish.price); $event.stopPropagation()"
                   class="px-4 py-2 bg-[#637359] text-white rounded-lg hover:bg-[#4a5a40] transition">
                   أضف للطلب
                 </button> -->
-              </div>
             </div>
           </div>
-        }
+        </div>
       </div>
-    </section>
+      }
+    </div>
+  </section>
   }
 </div>
 
@@ -123,10 +113,7 @@
   <div class="bg-white rounded-xl p-6 w-full max-w-md">
     <h2 class="text-2xl font-bold text-[#637359] mb-4">سلة التسوق</h2>
     <div class="mb-4 max-h-60 overflow-y-auto scrollbar-hide">
-      <div
-        *ngFor="let item of cartItems; let i = index"
-        class="flex justify-between items-center gap-2"
-        [ngClass]="{
+      <div *ngFor="let item of cartItems; let i = index" class="flex justify-between items-center gap-2" [ngClass]="{
           'border-b py-3': i < cartItems.length - 1,
           'pt-3': i === cartItems.length - 1
         }">
@@ -134,9 +121,7 @@
           <span class="block font-medium text-gray-800">{{ item.name }}</span>
           <span class="text-sm text-gray-600">{{ item.price?.toFixed(2) }} $</span>
         </div>
-        <button
-          (click)="removeFromCart(i)"
-          class="text-red-600 hover:text-red-800 transition text-sm font-bold px-2">
+        <button (click)="removeFromCart(i)" class="text-red-600 hover:text-red-800 transition text-sm font-bold px-2">
           حذف
         </button>
       </div>
@@ -147,13 +132,11 @@
       </p>
     </div>
     <div class="flex justify-between mt-6">
-      <button
-        (click)="closeCartModal()"
+      <button (click)="closeCartModal()"
         class="px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400 transition">
         إغلاق
       </button>
-      <button
-        (click)="proceedToCheckout()"
+      <button (click)="proceedToCheckout()"
         class="px-4 py-2 bg-[#637359] text-white rounded-lg hover:bg-[#4a5a40] transition">
         إتمام الطلب
       </button>
@@ -164,9 +147,7 @@
 <!-- Dish Detail Modal -->
 <div *ngIf="showDishModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
   <div class="bg-white rounded-xl p-6 w-[87%] max-w-md relative card-modal">
-    <button
-      (click)="closeDishModal()"
-      class="absolute close-modal text-gray-600 hover:text-gray-900 text-xl font-bold">
+    <button (click)="closeDishModal()" class="absolute close-modal text-gray-600 hover:text-gray-900 text-xl font-bold">
       &times;
     </button>
     <img [src]="selectedDish?.img" [alt]="selectedDish?.name" class="w-full h-50 object-cover rounded-lg mb-4" />

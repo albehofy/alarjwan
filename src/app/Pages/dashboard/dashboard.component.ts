@@ -11,7 +11,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // Inject the built dashboard CSS
-    const cssHref = '/assets/react-dashboard/dist/assets/index-CMSx6hGa.css';
+    const cssHref = '/assets/dashboard/assets/index-CMSx6hGa.css';
     if (!document.querySelector(`link[href="${cssHref}"]`)) {
       const link = document.createElement('link');
       link.rel = 'stylesheet';
@@ -30,7 +30,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
 
     // Inject the built dashboard JS bundle
-    const scriptSrc = '/assets/dashboard/dist/assets/index-DjoLKQy4.js';
+    const scriptSrc = '/assets/dashboard/assets/index-DjoLKQy4.js';
     if (!document.querySelector(`script[src="${scriptSrc}"]`)) {
       const script = document.createElement('script');
       script.type = 'module';

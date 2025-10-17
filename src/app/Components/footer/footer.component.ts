@@ -11,10 +11,10 @@ import { RouterLink } from '@angular/router';
 export class FooterComponent implements OnInit{
   private settings = inject(HomeComponentService)
   ngOnInit() {
-    this.settings.getSiteSetting().subscribe({
-      next:(res)=>{
-        console.log(res)
-      }
-    })
+    // this.settings.getSiteSetting().subscribe({
+    //   next:(res)=>{
+    //     console.log(res)
+    //   }
+    // })
   }
 }
