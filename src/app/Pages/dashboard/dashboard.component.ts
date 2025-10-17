@@ -4,10 +4,9 @@ import { Component, OnInit, ElementRef, OnDestroy } from '@angular/core';
   selector: 'app-dashboard',
   imports: [],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+  styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent implements OnInit, OnDestroy {
-
   constructor(private el: ElementRef) {}
 
   ngOnInit() {
@@ -21,7 +20,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
 
     // Ensure root container exists
-    let container = this.el.nativeElement.querySelector('#root') as HTMLElement | null;
+    let container = this.el.nativeElement.querySelector(
+      '#root'
+    ) as HTMLElement | null;
     if (!container) {
       container = document.createElement('div');
       container.id = 'root';
@@ -29,7 +30,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
 
     // Inject the built dashboard JS bundle
-    const scriptSrc = '/assets/react-dashboard/dist/assets/index-DjoLKQy4.js';
+    const scriptSrc = '/assets/dashboard/dist/assets/index-DjoLKQy4.js';
     if (!document.querySelector(`script[src="${scriptSrc}"]`)) {
       const script = document.createElement('script');
       script.type = 'module';
