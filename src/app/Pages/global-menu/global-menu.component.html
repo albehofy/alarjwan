@@ -42,10 +42,10 @@
         @for (section of categories; track $index) {
           <div>
             <button (click)="updateCuisineHeader(section.name, section.image); scrollToSection(section.id)"
-              class="flex-shrink-0 min-w-[60px] h-[60px] flex items-center justify-center font-semibold rounded-full border  overflow-hidden relative group cursor-pointer">
-              <img [src]="section.thumb" [alt]="section.name" class="w-full h-full object-cover" />
+              class="flex-shrink-0 min-w-[60px] h-[60px] flex items-center justify-center border font-semibold rounded-full border  overflow-hidden relative group cursor-pointer">
+              <img [src]="section.image" [alt]="section.name" class="w-full h-full object-cover" />
             </button>
-            <span class="text-xl font-bold">{{ section.name }}</span>
+            <span class="text-sm">{{ section.name }}</span>
             <!-- <div
               class="0 flex items-center justify-center group-hover:bg-opacity-60 transition">
             </div> -->

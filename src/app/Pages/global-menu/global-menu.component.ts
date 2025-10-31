@@ -63,6 +63,7 @@ export class GlobalMenuComponent implements OnInit {
             id: cat.id ?? '0',
             name: cat.name,
             description: cat.description,
+            image: cat.image,
             dishes: cat.items.map((dish: any) => ({
               id: dish.id ?? '0',
               name: dish.name,
