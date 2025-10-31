@@ -27,9 +27,10 @@
 .alarjwan-card {
   position: relative;
   overflow: hidden;
-  width: 100%;
+  width: 85%;
   height: 250px;
-  min-width: 270px;
+  min-width: 200px;
+  margin: auto;
 
   .object-cover {
     object-fit: fill;
@@ -56,22 +57,23 @@
 
 .pattern {
   position: absolute;
-  left: 0;
+  left: 10px;
+  top: 20px;
   z-index: 99;
-  width: 120px;
+  width: 100px;
+  scale: 0.9;
 }
 
 .top-pattern {
-  top: 0;
-
+  top: 15px;
+  left: 15px;
 }
 
 .bottom-pattern {
-  top: 100% !important;
-  right: 0;
-  width: 120px;
-  transform: rotate(180deg);
-
+  top: 37% !important;
+  right: -5px;
+  // width: 100px;
+  // transform: skew(180deg, 180deg);
 }
 
 .item-img {
@@ -107,12 +109,17 @@
 .card-wrappere-relative {
   position: relative;
   overflow: hidden;
+
   &:hover {
     .pattern {
       transition: transform 500ms ease-in-out;
-      transform: scale(0.9);
-      // scale: 0.9;
+      // transform: scale(0.9);
+      scale: 1;
     }
+
+    //     .bottom-pattern {
+    //   transform: rotate(180deg);
+    // }
   }
 }
 

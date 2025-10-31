@@ -1,26 +1,27 @@
-<!-- Back Button -->
-<div class="container mx-auto px-4 py-4 flex items-center justify-end">
-  <button [routerLink]="['/']"
-    class="inline-flex w-[max-content] items-center gap-2 text-[#637359] font-semibold hover:text-[#4a5a40] transition">
-    <span>العودة للرئيسية</span>
-    <i class="fas fa-arrow-left text-lg"></i>
-  </button>
-</div>
+<div class="bg-[#ede9df]">
+  <!-- Back Button -->
+  <div class="container mx-auto px-4 py-4 flex items-center justify-end">
+    <button [routerLink]="['/']"
+      class="inline-flex w-[max-content] items-center gap-2 text-[#637359] font-semibold hover:text-[#4a5a40] transition">
+      <span>العودة للرئيسية</span>
+      <i class="fas fa-arrow-left text-lg"></i>
+    </button>
+  </div>
 
-<!-- Header -->
-<div id="cuisine-header" class="bg-[#637359] py-16 text-center bg-cover bg-center"
-  [style.background-image]="cuisineBgImage">
-  <h1 class="text-5xl font-bold text-white mb-4">{{ cuisineTitle }}</h1>
-  <p class="text-xl text-white max-w-2xl mx-auto">
-    استمتع بأشهى الأطعمة من {{ cuisineTitle }}
-  </p>
-</div>
+  <!-- Header -->
+  <div id="cuisine-header" class="bg-[#637359] py-16 text-center bg-cover bg-center"
+    [style.background-image]="cuisineBgImage">
+    <h1 class="text-5xl font-bold text-white mb-4">{{ cuisineTitle }}</h1>
+    <p class="text-xl text-white max-w-2xl mx-auto">
+      استمتع بأشهى الأطعمة من {{ cuisineTitle }}
+    </p>
+  </div>
 
-<!-- Main Content -->
-<div class="container mx-auto px-4 py-12">
+  <!-- Main Content -->
+  <div class="container mx-auto px-4 py-12">
 
-  <!-- Cuisine Slider -->
-  <div class="relative mb-12">
+    <!-- Cuisine Slider -->
+    <!-- <div class="relative mb-12">
     <div class="flex overflow-x-auto pb-4 px-2 gap-6" style="scrollbar-width: none">
       @for (cuisine of menuData; track cuisine.name) {
       <div (click)="updateCuisineHeader(cuisine.name, cuisine.image)"
@@ -33,71 +34,82 @@
       </div>
       }
     </div>
-  </div>
+  </div> -->
 
-  <!-- Sticky Category Navbar -->
-  <nav class="sticky top-0 z-40 bg-white py-3 mb-8 overflow-x-auto whitespace-nowrap scrollbar-hide">
-    <div class="container mx-auto flex gap-3 px-4 overflow-x-auto no-scrollbar scetions-container">
-      @for (section of categories; track $index) {
-      <button (click)="scrollToSection(section.id)" [class.bg-[#637359]]="activeSectionId === section.id"
+    <!-- Sticky Category Navbar -->
+    <nav class="sticky top-0 z-40 bg-[#ede9df] py-3 mb-8 overflow-x-auto whitespace-nowrap scrollbar-hide">
+      <div class="flex overflow-x-auto pb-4 px-2 gap-6" style="scrollbar-width: none">
+        @for (section of categories; track $index) {
+          <div>
+            <button (click)="updateCuisineHeader(section.name, section.image); scrollToSection(section.id)"
+              class="flex-shrink-0 min-w-[60px] h-[60px] flex items-center justify-center font-semibold rounded-full border  overflow-hidden relative group cursor-pointer">
+              <img [src]="section.thumb" [alt]="section.name" class="w-full h-full object-cover" />
+            </button>
+            <span class="text-xl font-bold">{{ section.name }}</span>
+            <!-- <div
+              class="0 flex items-center justify-center group-hover:bg-opacity-60 transition">
+            </div> -->
+
+          </div>
+        <!-- <button (click)="scrollToSection(section.id)" [class.bg-[#637359]]="activeSectionId === section.id"
         [class.text-white]="activeSectionId === section.id" [class.text-[#637359]]="activeSectionId !== section.id"
         [class.bg-white]="activeSectionId !== section.id"
         class="min-w-[60px] h-[60px] flex items-center justify-center font-semibold rounded-full border border-[#637359] hover:bg-[#637359] hover:text-white transition">
         {{ section.name }}
-      </button>
-      }
-    </div>
+      </button> -->
+        }
+      </div>
 
-  </nav>
+    </nav>
 
-  <!-- Dishes Grid -->
-  @for (section of categories; track section.id; let i = $index) {
-  <section [id]="'section-' + section.id" class="category-card bg-white rounded-lg p-6 mb-10 scroll-mt-32"
-    data-aos="fade-up" [attr.data-aos-delay]="i * 100">
+    <!-- Dishes Grid -->
+    @for (section of categories; track section.id; let i = $index) {
+    <section [id]="'section-' + section.id" class="category-card bg-[#ede9df] rounded-lg p-6 mb-10 scroll-mt-32"
+      data-aos="fade-up" [attr.data-aos-delay]="i * 100">
 
-    <!-- Sticky Section Header -->
-    <header class="bg-white z-30  pb-5 mb-6">
-      <h3 class="text-2xl font-bold text-gray-900">{{ section.name }}</h3>
-      <p class="mt-1 text-gray-600">{{ section.description }}</p>
-    </header>
+      <!-- Sticky Section Header -->
+      <header class="bg-[#ede9df] z-30  pb-5 mb-6">
+        <h3 class="text-2xl font-bold text-gray-900">{{ section.name }}</h3>
+        <p class="mt-1 text-gray-600">{{ section.description }}</p>
+      </header>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      @for (dish of section.dishes; track dish.id) {
-      <div (click)="openDishModal(dish)"
-        class="custom-border card-wrappere-relative  text-white rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105 cursor-pointer"
-        data-aos="fade-up">
-        <img src="/assets/images/pattern.png" [alt]="dish.name" class="top-pattern pattern" />
-        <!-- <img src="/assets/images/pattern.png" [alt]="dish.name" class="bottom-pattern pattern" /> -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        @for (dish of section.dishes; track dish.id) {
+        <div (click)="openDishModal(dish)"
+          class="custom-border card-wrappere-relative  text-white rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105 cursor-pointer"
+          data-aos="fade-up">
+          <img src="/assets/images/pattern.png" [alt]="dish.name" class="top-pattern pattern" />
+          <img src="/assets/images/pattern2.png" [alt]="dish.name" class="bottom-pattern pattern" />
 
-        <div class="py-5">
-          <div class="alarjwan-card">
-            <img [src]="dish.img" [alt]="dish.name" class="w-full h-full object-cover item-img rounded-lg" />
-          </div>
+          <div class="py-5">
+            <div class="alarjwan-card">
+              <img [src]="dish.img" [alt]="dish.name" class="w-full h-full object-cover item-img rounded-lg" />
+            </div>
 
 
-          <div class="p-2 bg-white">
-            <h3 class="text-xl font-bold text-gray-800 mb-2 text-center">{{ dish.name }}</h3>
-            <p class="text-gray-600 mb-4 text-center">{{ dish.desc }}</p>
-            <div class="flex justify-center items-center text-center">
-              <span class="text-[#637359] font-bold text-center">${{ dish.price.toFixed(2) }}</span>
-              <!-- <button
+            <div class="p-2 bg-[#ede9df]">
+              <h3 class="text-xl font-bold text-gray-800 mb-2 text-center">{{ dish.name }}</h3>
+              <p class="text-gray-600 mb-4 text-center">{{ dish.desc }}</p>
+              <div class="flex justify-center items-center text-center">
+                <span class="text-[#637359] font-bold text-center">${{ dish.price.toFixed(2) }}</span>
+                <!-- <button
                   (click)="addToOrder(dish.id, dish.name, dish.quantity, dish.price); $event.stopPropagation()"
                   class="px-4 py-2 bg-[#637359] text-white rounded-lg hover:bg-[#4a5a40] transition">
                   أضف للطلب
                 </button> -->
+              </div>
             </div>
           </div>
         </div>
+        }
       </div>
-      }
-    </div>
-  </section>
-  }
-</div>
+    </section>
+    }
+  </div>
 
-<!-- Cart Button -->
-<div class="fixed bottom-6 right-6 z-40">
-  <!-- <button
+  <!-- Cart Button -->
+  <div class="fixed bottom-6 right-6 z-40">
+    <!-- <button
     (click)="viewCart()"
     class="relative p-4 bg-[#637359] text-white rounded-full shadow-lg hover:bg-[#4a5a40] transition flex items-center justify-center w-14 h-14">
     <i class="fas fa-shopping-cart text-xl"></i>
@@ -107,62 +119,64 @@
       {{ cartItems.length }}
     </span>
   </button> -->
-</div>
+  </div>
 
-<!-- Cart Modal -->
-<div *ngIf="showCart" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-  <div class="bg-white rounded-xl p-6 w-full max-w-md">
-    <h2 class="text-2xl font-bold text-[#637359] mb-4">سلة التسوق</h2>
-    <div class="mb-4 max-h-60 overflow-y-auto scrollbar-hide">
-      <div *ngFor="let item of cartItems; let i = index" class="flex justify-between items-center gap-2" [ngClass]="{
+  <!-- Cart Modal -->
+  <div *ngIf="showCart" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-[#ede9df] rounded-xl p-6 w-full max-w-md">
+      <h2 class="text-2xl font-bold text-[#637359] mb-4">سلة التسوق</h2>
+      <div class="mb-4 max-h-60 overflow-y-auto scrollbar-hide">
+        <div *ngFor="let item of cartItems; let i = index" class="flex justify-between items-center gap-2" [ngClass]="{
           'border-b py-3': i < cartItems.length - 1,
           'pt-3': i === cartItems.length - 1
         }">
-        <div class="flex-1">
-          <span class="block font-medium text-gray-800">{{ item.name }}</span>
-          <span class="text-sm text-gray-600">{{ item.price?.toFixed(2) }} $</span>
+          <div class="flex-1">
+            <span class="block font-medium text-gray-800">{{ item.name }}</span>
+            <span class="text-sm text-gray-600">{{ item.price?.toFixed(2) }} $</span>
+          </div>
+          <button (click)="removeFromCart(i)" class="text-red-600 hover:text-red-800 transition text-sm font-bold px-2">
+            حذف
+          </button>
         </div>
-        <button (click)="removeFromCart(i)" class="text-red-600 hover:text-red-800 transition text-sm font-bold px-2">
-          حذف
+      </div>
+      <div class="border-t pt-4">
+        <p class="text-lg font-bold text-[#637359]">
+          المجموع: {{ cartTotal.toFixed(2) }} $
+        </p>
+      </div>
+      <div class="flex justify-between mt-6">
+        <button (click)="closeCartModal()"
+          class="px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400 transition">
+          إغلاق
+        </button>
+        <button (click)="proceedToCheckout()"
+          class="px-4 py-2 bg-[#637359] text-white rounded-lg hover:bg-[#4a5a40] transition">
+          إتمام الطلب
         </button>
       </div>
     </div>
-    <div class="border-t pt-4">
-      <p class="text-lg font-bold text-[#637359]">
-        المجموع: {{ cartTotal.toFixed(2) }} $
-      </p>
-    </div>
-    <div class="flex justify-between mt-6">
-      <button (click)="closeCartModal()"
-        class="px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400 transition">
-        إغلاق
-      </button>
-      <button (click)="proceedToCheckout()"
-        class="px-4 py-2 bg-[#637359] text-white rounded-lg hover:bg-[#4a5a40] transition">
-        إتمام الطلب
-      </button>
-    </div>
   </div>
-</div>
 
-<!-- Dish Detail Modal -->
-<div *ngIf="showDishModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-  <div class="bg-white rounded-xl p-6 w-[87%] max-w-md relative card-modal">
-    <button (click)="closeDishModal()" class="absolute close-modal text-gray-600 hover:text-gray-900 text-xl font-bold">
-      &times;
-    </button>
-    <img [src]="selectedDish?.img" [alt]="selectedDish?.name" class="w-full h-50 object-cover rounded-lg mb-4" />
-    <h2 class="text-2xl font-bold text-[#637359] mb-2 text-center">
-      {{ selectedDish?.name }}
-    </h2>
-    <p class="text-gray-700 mb-4 text-center">{{ selectedDish?.desc }}</p>
-    <p class="text-lg font-bold text-[#637359] mb-6 text-center">
-      السعر: {{ selectedDish?.price?.toFixed(2) }} $
-    </p>
-    <!-- <button
+  <!-- Dish Detail Modal -->
+  <div *ngIf="showDishModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-[#ede9df] rounded-xl p-6 w-[87%] max-w-md relative card-modal">
+      <button (click)="closeDishModal()"
+        class="absolute close-modal text-gray-600 hover:text-gray-900 text-xl font-bold">
+        &times;
+      </button>
+      <img [src]="selectedDish?.img" [alt]="selectedDish?.name" class="w-full h-50 object-cover rounded-lg mb-4" />
+      <h2 class="text-2xl font-bold text-[#637359] mb-2 text-center">
+        {{ selectedDish?.name }}
+      </h2>
+      <p class="text-gray-700 mb-4 text-center">{{ selectedDish?.desc }}</p>
+      <p class="text-lg font-bold text-[#637359] mb-6 text-center">
+        السعر: {{ selectedDish?.price?.toFixed(2) }} $
+      </p>
+      <!-- <button
       (click)="addToOrder(selectedDish?.id, selectedDish?.name, selectedDish?.quantity, selectedDish?.price); closeDishModal()"
       class="w-full px-4 py-2 bg-[#637359] text-white rounded-lg hover:bg-[#4a5a40] transition">
       أضف للطلب
     </button> -->
+    </div>
   </div>
 </div>
