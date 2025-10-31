@@ -42,7 +42,7 @@
         @for (section of categories; track $index) {
           <div>
             <button (click)="updateCuisineHeader(section.name, section.image); scrollToSection(section.id)"
-              class="flex-shrink-0 min-w-[60px] h-[60px] flex items-center justify-center border font-semibold rounded-full border  overflow-hidden relative group cursor-pointer">
+              class="flex-shrink-0 min-w-[70px] w-[70px] h-[70px] flex items-center justify-center border font-semibold rounded-full border  overflow-hidden relative group cursor-pointer">
               <img [src]="section.image" [alt]="section.name" class="w-full h-full object-cover" />
             </button>
             <span class="text-sm">{{ section.name }}</span>
@@ -91,7 +91,7 @@
               <h3 class="text-xl font-bold text-gray-800 mb-2 text-center">{{ dish.name }}</h3>
               <p class="text-gray-600 mb-4 text-center">{{ dish.desc }}</p>
               <div class="flex justify-center items-center text-center">
-                <span class="text-[#637359] font-bold text-center">${{ dish.price.toFixed(2) }}</span>
+                <span class="text-[#637359] font-bold text-center flex items-center gap-1"> {{ dish.price.toFixed(2) }} <img src="/assets/images/riyal.png" alt="riyal" width="20px"></span>
                 <!-- <button
                   (click)="addToOrder(dish.id, dish.name, dish.quantity, dish.price); $event.stopPropagation()"
                   class="px-4 py-2 bg-[#637359] text-white rounded-lg hover:bg-[#4a5a40] transition">
@@ -132,7 +132,7 @@
         }">
           <div class="flex-1">
             <span class="block font-medium text-gray-800">{{ item.name }}</span>
-            <span class="text-sm text-gray-600">{{ item.price?.toFixed(2) }} $</span>
+            <span class="text-sm text-gray-600 flex items-center gap-1">{{ item.price?.toFixed(2) }} <img src="/assets/images/riyal.png" alt="riyal" width="20px" height="35px"></span>
           </div>
           <button (click)="removeFromCart(i)" class="text-red-600 hover:text-red-800 transition text-sm font-bold px-2">
             حذف
@@ -140,8 +140,8 @@
         </div>
       </div>
       <div class="border-t pt-4">
-        <p class="text-lg font-bold text-[#637359]">
-          المجموع: {{ cartTotal.toFixed(2) }} $
+        <p class="text-lg font-bold text-[#637359] flex items-center gap-1">
+          المجموع: {{ cartTotal.toFixed(2) }}  <img src="/assets/images/riyal.png" alt="riyal" width="20px">
         </p>
       </div>
       <div class="flex justify-between mt-6">
@@ -169,8 +169,8 @@
         {{ selectedDish?.name }}
       </h2>
       <p class="text-gray-700 mb-4 text-center">{{ selectedDish?.desc }}</p>
-      <p class="text-lg font-bold text-[#637359] mb-6 text-center">
-        السعر: {{ selectedDish?.price?.toFixed(2) }} $
+      <p class="text-lg font-bold text-[#637359] mb-6 text-center  flex items-center gap-1">
+        السعر: {{ selectedDish?.price?.toFixed(2) }} <img src="/assets/images/riyal.png" alt="riyal" width="20px">
       </p>
       <!-- <button
       (click)="addToOrder(selectedDish?.id, selectedDish?.name, selectedDish?.quantity, selectedDish?.price); closeDishModal()"
