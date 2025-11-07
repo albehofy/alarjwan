@@ -18,7 +18,7 @@
   </div>
 
   <!-- Main Content -->
-  <div class="container mx-auto px-4 py-12">
+  <div class="w-[97%] mx-auto px-5 py-5">
 
     <!-- Cuisine Slider -->
     <!-- <div class="relative mb-12">
@@ -37,13 +37,13 @@
   </div> -->
 
     <!-- Sticky Category Navbar -->
-    <nav class="sticky top-0 high-index bg-[#ede9df] py-3 mb-8 overflow-x-auto whitespace-nowrap scrollbar-hide">
-      <div class="flex overflow-x-auto pb-2 px-2 gap-6" style="scrollbar-width: none">
+    <nav class="sticky top-0 high-index bg-[#ede9df] py-3 mb-4 overflow-x-auto whitespace-nowrap scrollbar-hide">
+      <div class="flex overflow-x-auto pb-2 px-2 gap-3" style="scrollbar-width: none">
         @for (section of categories; track $index) {
           <div class="text-center">
             <button (click)="updateCuisineHeader(section.name, section.image); scrollToSection(section.id)"
-              class="flex-shrink-0 min-w-[120px] w-[120px] h-[120px] flex items-center justify-center border font-semibold rounded-full border  overflow-hidden relative group cursor-pointer">
-              <img [src]="section.image" [alt]="section.name" class="w-full h-full object-cover" />
+              class="flex-shrink-0 min-w-[105px] w-[105px] h-[105px] flex items-center justify-center border font-semibold rounded-full border  overflow-hidden relative group cursor-pointer">
+              <img [src]="section.image" class="w-full h-full object-cover" />
             </button>
             <span class="text-sm">{{ section.name }}</span>
             <!-- <div
@@ -123,7 +123,7 @@
 
   <!-- Cart Modal -->
   <div *ngIf="showCart" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-    <div class="bg-[#ede9df] rounded-xl p-6 w-full max-w-md">
+    <div class="bg-[#ede9df] rounded-xl p-2 w-full max-w-md">
       <h2 class="text-2xl font-bold text-[#637359] mb-4">سلة التسوق</h2>
       <div class="mb-4 max-h-60 overflow-y-auto scrollbar-hide">
         <div *ngFor="let item of cartItems; let i = index" class="flex justify-between items-center gap-2" [ngClass]="{
@@ -159,7 +159,7 @@
 
   <!-- Dish Detail Modal -->
   <div *ngIf="showDishModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center max-level-index">
-    <div class="bg-[#ede9df] rounded-xl p-6 w-[87%] max-w-md relative card-modal">
+    <div class="bg-[#ede9df] rounded-xl p-2 w-[87%] max-w-md relative card-modal">
       <button (click)="closeDishModal()"
         class="absolute close-modal text-gray-600 hover:text-gray-900 text-xl font-bold">
         &times;
