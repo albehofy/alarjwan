@@ -76,8 +76,8 @@
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
             @for (dish of section.dishes; track dish.id) {
             <div (click)="openDishModal(dish)"
-              class="custom-border card-wrappere-relative  text-white rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105 cursor-pointer">
-              <img src="/assets/images/pattern.png" [alt]="dish.name" class="top-pattern pattern" />
+              class="custom-border card-wrappere-relative  text-white rounded-xl overflow-hidden transition-transform duration-300 cursor-pointer">
+              <img src="/assets/images/pattern.png" [alt]="dish.name" class="top-pattern pattern " />
               <img src="/assets/images/pattern2.png" [alt]="dish.name" class="bottom-pattern pattern" />
     
               <div class="py-5">

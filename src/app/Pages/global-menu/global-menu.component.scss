@@ -61,7 +61,7 @@
   top: 20px;
   z-index: 99;
   width: 100px;
-  scale: 0.9;
+  transform: scale(0.9);
 }
 
 .top-pattern {
@@ -112,9 +112,9 @@
 
   &:hover {
     .pattern {
-      transition: transform 500ms ease-in-out;
-      // transform: scale(0.9);
-      scale: 1;
+      transition: transform 600ms linear;
+      transform: scale(1);
+      // scale: 1;
     }
 
     //     .bottom-pattern {
