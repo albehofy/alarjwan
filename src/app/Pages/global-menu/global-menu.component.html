@@ -37,12 +37,12 @@
   </div> -->
 
     <!-- Sticky Category Navbar -->
-    <nav class="sticky top-0 z-40 bg-[#ede9df] py-3 mb-8 overflow-x-auto whitespace-nowrap scrollbar-hide">
-      <div class="flex overflow-x-auto pb-4 px-2 gap-6" style="scrollbar-width: none">
+    <nav class="sticky top-0 high-index bg-[#ede9df] py-3 mb-8 overflow-x-auto whitespace-nowrap scrollbar-hide">
+      <div class="flex overflow-x-auto pb-2 px-2 gap-6" style="scrollbar-width: none">
         @for (section of categories; track $index) {
-          <div>
+          <div class="text-center">
             <button (click)="updateCuisineHeader(section.name, section.image); scrollToSection(section.id)"
-              class="flex-shrink-0 min-w-[70px] w-[70px] h-[70px] flex items-center justify-center border font-semibold rounded-full border  overflow-hidden relative group cursor-pointer">
+              class="flex-shrink-0 min-w-[120px] w-[120px] h-[120px] flex items-center justify-center border font-semibold rounded-full border  overflow-hidden relative group cursor-pointer">
               <img [src]="section.image" [alt]="section.name" class="w-full h-full object-cover" />
             </button>
             <span class="text-sm">{{ section.name }}</span>
@@ -64,46 +64,46 @@
 
     <!-- Dishes Grid -->
     @for (section of categories; track section.id; let i = $index) {
-    <section [id]="'section-' + section.id" class="category-card bg-[#ede9df] rounded-lg p-6 mb-10 scroll-mt-32"
-      data-aos="fade-up" [attr.data-aos-delay]="i * 100">
-
-      <!-- Sticky Section Header -->
-      <header class="bg-[#ede9df] z-30  pb-5 mb-6">
-        <h3 class="text-2xl font-bold text-gray-900">{{ section.name }}</h3>
-        <p class="mt-1 text-gray-600">{{ section.description }}</p>
-      </header>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        @for (dish of section.dishes; track dish.id) {
-        <div (click)="openDishModal(dish)"
-          class="custom-border card-wrappere-relative  text-white rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105 cursor-pointer"
-          data-aos="fade-up">
-          <img src="/assets/images/pattern.png" [alt]="dish.name" class="top-pattern pattern" />
-          <img src="/assets/images/pattern2.png" [alt]="dish.name" class="bottom-pattern pattern" />
-
-          <div class="py-5">
-            <div class="alarjwan-card">
-              <img [src]="dish.img" [alt]="dish.name" class="w-full h-full object-cover item-img rounded-lg" />
-            </div>
-
-
-            <div class="p-2 bg-[#ede9df]">
-              <h3 class="text-xl font-bold text-gray-800 mb-2 text-center">{{ dish.name }}</h3>
-              <p class="text-gray-600 mb-4 text-center">{{ dish.desc }}</p>
-              <div class="flex justify-center items-center text-center">
-                <span class="text-[#637359] font-bold text-center flex items-center gap-1"> {{ dish.price.toFixed(2) }} <img src="/assets/images/riyal.png" alt="riyal" width="20px"></span>
-                <!-- <button
-                  (click)="addToOrder(dish.id, dish.name, dish.quantity, dish.price); $event.stopPropagation()"
-                  class="px-4 py-2 bg-[#637359] text-white rounded-lg hover:bg-[#4a5a40] transition">
-                  أضف للطلب
-                </button> -->
+      <div class="m-0 p-0">
+        <section [id]="'section-' + section.id" class="category-card bg-[#ede9df] rounded-lg  mb-10 scroll-mt-32">
+    
+          <!-- Sticky Section Header -->
+          <header class="bg-[#ede9df] z-30  pb-0 mb-0">
+            <h3 class="text-2xl font-bold text-gray-900">{{ section.name }}</h3>
+            <p class="mt-1 text-gray-600">{{ section.description }}</p>
+          </header>
+    
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
+            @for (dish of section.dishes; track dish.id) {
+            <div (click)="openDishModal(dish)"
+              class="custom-border card-wrappere-relative  text-white rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105 cursor-pointer">
+              <img src="/assets/images/pattern.png" [alt]="dish.name" class="top-pattern pattern" />
+              <img src="/assets/images/pattern2.png" [alt]="dish.name" class="bottom-pattern pattern" />
+    
+              <div class="py-5">
+                <div class="alarjwan-card">
+                  <img [src]="dish.img" [alt]="dish.name" class="w-full h-full object-cover item-img rounded-lg" />
+                </div>
+    
+    
+                <div class="p-2 bg-[#ede9df]">
+                  <h3 class="text-xl font-bold text-gray-800 mb-2 text-center">{{ dish.name }}</h3>
+                  <p class="text-gray-600 mb-4 text-center">{{ dish.desc }}</p>
+                  <div class="flex justify-center items-center text-center">
+                    <span class="text-[#637359] font-bold text-center flex items-center gap-1"> {{ dish.price.toFixed(2) }} <img src="/assets/images/riyal.png" alt="riyal" width="20px"></span>
+                    <!-- <button
+                      (click)="addToOrder(dish.id, dish.name, dish.quantity, dish.price); $event.stopPropagation()"
+                      class="px-4 py-2 bg-[#637359] text-white rounded-lg hover:bg-[#4a5a40] transition">
+                      أضف للطلب
+                    </button> -->
+                  </div>
+                </div>
               </div>
             </div>
+            }
           </div>
-        </div>
-        }
+        </section>
       </div>
-    </section>
     }
   </div>
 
@@ -158,7 +158,7 @@
   </div>
 
   <!-- Dish Detail Modal -->
-  <div *ngIf="showDishModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <div *ngIf="showDishModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center max-level-index">
     <div class="bg-[#ede9df] rounded-xl p-6 w-[87%] max-w-md relative card-modal">
       <button (click)="closeDishModal()"
         class="absolute close-modal text-gray-600 hover:text-gray-900 text-xl font-bold">
@@ -180,3 +180,5 @@
     </div>
   </div>
 </div>
+
+<app-loader *ngIf="loader"></app-loader>

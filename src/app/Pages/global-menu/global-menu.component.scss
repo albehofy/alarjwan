@@ -29,7 +29,7 @@
   overflow: hidden;
   width: 85%;
   height: 250px;
-  min-width: 200px;
+  min-width: 270px;
   margin: auto;
 
   .object-cover {
@@ -125,4 +125,12 @@
 
 .bg-dark-white {
   background-color: #FFFFFF90 !important;
+}
+
+.high-index{
+  z-index: 9999999999;
+}
+
+.max-level-index{
+  z-index: 9999999999999999;
 }

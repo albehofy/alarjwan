@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { MenuService } from '../../Services/menu.service';
 import { RouterLink } from '@angular/router';
+import { LoaderComponent } from "../../Components/loader/loader.component";
 
 interface CartItem {
   name: string;
@@ -25,13 +26,13 @@ interface Dish {
   templateUrl: './global-menu.component.html',
   styleUrls: ['./global-menu.component.scss'],
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, LoaderComponent],
 })
 export class GlobalMenuComponent implements OnInit {
   cartItems: CartItem[] = [];
   cartTotal: number = 0;
   showCart: boolean = false;
-
+  loader: boolean = true;
   cuisineTitle = 'المأكولات العالمية';
   cuisineSubtitle = 'اكتشف أطباق لذيذة من حول العالم';
   cuisineBgImage = "linear-gradient(rgba(99, 115, 89, 0.8), rgba(99, 115, 89, 0.8)), url('http://static.photos/food/1200x630/401')";
@@ -43,18 +44,27 @@ export class GlobalMenuComponent implements OnInit {
   categories: any = [];
   activeSectionId: any = null;
   showDetails: boolean = false;
-
   constructor(
     private MenuService: MenuService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadCartFromStorage();
     this.loadAllMenuData();
+    this.MenuService.Menu.subscribe({
+      next: res => {
+        this.menuData = res.menuData;
+        this.categories = res.categories;
+      }
+    }); 
+    
+    window.setTimeout(() => {
+      this.loader = false;
+    }, 1000);
   }
 
-  // 🔹 Load menu data
+  // Load menu data
   loadAllMenuData(): void {
     this.MenuService.getAllMenuData().subscribe({
       next: (data) => {
@@ -84,6 +94,8 @@ export class GlobalMenuComponent implements OnInit {
           this.cuisineTitle = this.menuData[0].name;
           this.cuisineBgImage = this.menuData[0].image;
         }
+        localStorage.setItem('menuData', JSON.stringify(this.menuData))
+        localStorage.setItem('categories', JSON.stringify(this.categories))
       },
       error: (err: any) => {
         console.error('Error loading packages:', err);
@@ -184,5 +196,5 @@ export class GlobalMenuComponent implements OnInit {
   // goBack(): void {
   //   this.router.navigate(['/home']);
   // }
-  
+
 }

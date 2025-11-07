@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,6 +10,7 @@ export class MenuService {
   private apiBaseUrl = environment.apiUrl;
   private apiUrl = '/api/Menus';
 
+  Menu:BehaviorSubject<any> = new BehaviorSubject([]);
   constructor(private http: HttpClient) {}
 
     // Fetch all menus data

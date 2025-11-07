@@ -30,7 +30,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
 
     // Inject the built dashboard JS bundle
-    const scriptSrc = '/assets/dashboard/assets/index-DjoLKQy4.js';
+    const scriptSrc = '/assets/dashboard/assets/index-DT7sx_Ns.js';
     if (!document.querySelector(`script[src="${scriptSrc}"]`)) {
       const script = document.createElement('script');
       script.type = 'module';
