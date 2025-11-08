@@ -108,7 +108,10 @@
 
 .card-wrappere-relative {
   position: relative;
-  overflow: hidden;
+  // overflow: hidden;
+  // max-width: 450px;
+  // margin-left: auto;
+  // margin-right: auto;
 
   &:hover {
     .pattern {
@@ -127,17 +130,31 @@
   background-color: #FFFFFF90 !important;
 }
 
-.high-index{
+.high-index {
   z-index: 9999999999;
 }
 
-.max-level-index{
+.max-level-index {
   z-index: 9999999999999999;
 }
 
 
+.h-custom-auto {
+  height: auto !important;
+}
+
+
+
+
+@media only screen and (min-width: 1200px) {
+  .alarjwan-card {
+    // width: 100% !important;
+    height: 330px !important
+  }
+}
+
 @media only screen and (max-width: 590px) {
   .alarjwan-card {
-    width: 100%!important;
+    width: 100% !important;
   }
 }
