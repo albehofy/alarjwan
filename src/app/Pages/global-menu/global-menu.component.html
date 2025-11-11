@@ -80,7 +80,7 @@
               <img src="/assets/images/pattern.png" [alt]="dish.name" class="top-pattern pattern " />
               <img src="/assets/images/pattern2.png" [alt]="dish.name" class="bottom-pattern pattern" />
     
-              <div class="py-5">
+              <div class="py-5 px-3">
                 <div class="alarjwan-card">
                   <!-- <img [src]="'https://picsum.photos/300/250'" [alt]="dish.name" class="w-full h-full object-cover item-img rounded-lg" /> -->
                   <img [src]="dish.img" [alt]="dish.name" class="w-full h-custom-auto object-cover h-auto item-img rounded-lg" />
@@ -110,17 +110,13 @@
 
   <!-- Cart Button -->
   <div class="fixed bottom-6 right-6 z-40">
-    <!-- <button
-    (click)="viewCart()"
-    class="relative p-4 bg-[#637359] text-white rounded-full shadow-lg hover:bg-[#4a5a40] transition flex items-center justify-center w-14 h-14">
-    <i class="fas fa-shopping-cart text-xl"></i>
-    <span
-      *ngIf="cartItems.length > 0"
-      class="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">
-      {{ cartItems.length }}
-    </span>
-  </button> -->
+    <!-- Scroll to top button -->
   </div>
+  <button *ngIf="showScrollTop" (click)="scrollToTop()"
+    class="scroll-top-btn relative p-3 bg-[#637359] text-white rounded-full shadow-lg hover:bg-[#4a5a40] transition flex items-center justify-center w-12 h-12"
+    aria-label="Scroll to top">
+    <i class="fas fa-arrow-up text-lg"></i>
+  </button>
 
   <!-- Cart Modal -->
   <div *ngIf="showCart" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">

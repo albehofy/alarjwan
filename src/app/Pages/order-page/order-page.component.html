@@ -72,7 +72,8 @@
               {{ item?.name }}
             </span>
             <span>الكمية: {{ item.quantity ? item.quantity : 1 }}</span>
-            <span class="font-semibold">{{ item.price * 1 }} ج.م</span>
+            <span class="font-semibold">{{ item.price * 1 }}<img class=" inline-block mx-2 w-6 h-6"
+                    src="assets/images/riyal.png" alt="sar" /></span>
           </div>
         }
       </div>
@@ -87,7 +88,8 @@
           <div class="mb-3 p-3 border rounded">
             <div class="flex items-center justify-between mb-2">
               <span class="font-medium">باكدج رقم {{ pkg.id }}</span>
-              <span class="font-semibold">{{ pkg.name }} ج.م</span>
+              <span class="font-semibold">{{ pkg.name }} <img class=" inline-block mx-2 w-6 h-6"
+                    src="assets/images/riyal.png" alt="sar" /></span>
             </div>
 
             <div class="pl-4 border-t pt-2 text-sm text-gray-700">
@@ -106,7 +108,8 @@
 
     <!-- الإجمالي -->
     <div class="text-right font-semibold mt-4 text-lg">
-      الإجمالي: {{ total }} ج.م
+      الإجمالي: {{ total }}<img class=" inline-block mx-2 w-6 h-6"
+                    src="assets/images/riyal.png" alt="sar" />
     </div>
 
     <!-- زر تأكيد -->

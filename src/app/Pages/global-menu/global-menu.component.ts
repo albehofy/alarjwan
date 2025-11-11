@@ -44,6 +44,7 @@ export class GlobalMenuComponent implements OnInit {
   categories: any = [];
   activeSectionId: any = null;
   showDetails: boolean = false;
+  showScrollTop: boolean = false;
   constructor(
     private MenuService: MenuService,
     private router: Router
@@ -177,9 +178,21 @@ export class GlobalMenuComponent implements OnInit {
     }
   }
 
+  // 🔹 Scroll to top smoothly
+  scrollToTop(): void {
+    try {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (e) {
+      // fallback
+      window.scrollTo(0, 0);
+    }
+  }
+
   // 🔹 Detect current visible section to highlight active tab
   @HostListener('window:scroll', [])
   onScroll(): void {
+    // show/hide scroll-to-top button when user scrolls down
+    this.showScrollTop = window.pageYOffset > 250;
     for (const section of this.categories) {
       const el = document.getElementById('section-' + section.id);
       if (el) {

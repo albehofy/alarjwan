@@ -158,3 +158,23 @@
     width: 100% !important;
   }
 }
+
+/* Scroll to top button styling */
+.scroll-top-btn {
+  position: fixed;
+  bottom: 6rem; /* placed above other bottom controls */
+  right: 1.5rem;
+  z-index: 999999999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  transition: transform 150ms ease, background-color 150ms ease;
+
+  &:hover {
+    transform: translateY(-4px);
+  }
+}

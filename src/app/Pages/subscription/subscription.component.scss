@@ -10,8 +10,8 @@
   transition: all 0.3s ease;
 }
 .category-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  // transform: translateY(-5px);
+  // box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
 .item-card {
@@ -20,6 +20,7 @@
 }
 .item-card:hover {
   border-color: #637359;
+  cursor: pointer;
 }
 .item-card.selected {
   border-color: #637359;
