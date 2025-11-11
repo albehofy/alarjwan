@@ -106,7 +106,7 @@ export class GlobalMenuComponent implements OnInit {
 
   // 🔹 Update cuisine header when clicking on slider
   updateCuisineHeader(name: string, imageUrl: string): void {
-    this.cuisineTitle = `مأكولات ${name}`;
+    this.cuisineTitle = `${name}`;
     this.cuisineSubtitle = `اكتشف أطباق ${name} اللذيذة`;
     this.cuisineBgImage = `linear-gradient(rgba(99, 115, 89, 0.8), rgba(99, 115, 89, 0.8)), url('${imageUrl}')`;
   }
