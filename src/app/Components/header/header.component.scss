@@ -208,7 +208,7 @@
     @media only screen and (max-width: 1700px) {
       header {
         h1 {
-          font-size: 7rem;
+          font-size: 5rem;
         }
       }
     }
@@ -216,7 +216,7 @@
     @media only screen and (max-width: 1355px) {
       header {
         h1 {
-          font-size: 6rem;
+          font-size: 4rem;
         }
       }
     }
@@ -224,7 +224,7 @@
     @media only screen and (max-width: 971px) {
       header {
         h1 {
-          font-size: 4rem;
+          font-size: 3rem;
         }
       }
     }
@@ -258,15 +258,17 @@
     @media only screen and (max-width: 665px) {
       header {
         h1 {
-          font-size: 3rem;
+          margin-top: 5vh;
+          font-size: 2rem;
         }
       }
     }
-
+    
     @media only screen and (max-width: 360px) {
       header {
         h1 {
-          font-size: 2rem;
+          margin-top: 7vh;
+          font-size: 1.75rem;
         }
       }
     }
