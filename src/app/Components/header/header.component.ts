@@ -18,6 +18,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   header = '';
   description = '';
   title = '';
+  hasSubscription= false; 
 
   images: Array<backgroundInterface> = [
   ];
@@ -48,6 +49,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       }
     })
     if (this.images.length > 0) {
+      this.hasSubscription = true; 
       this.subscription = interval(4000).subscribe(() => {
         this.previousImage = JSON.parse(JSON.stringify(this.image));
         this.index++;
@@ -83,7 +85,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    if(this.hasSubscription){
+      this.subscription.unsubscribe();
+    }
   }
 
   toggleNavbar() {
