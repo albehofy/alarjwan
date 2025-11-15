@@ -57,6 +57,7 @@ export class GlobalMenuComponent implements OnInit {
       next: res => {
         this.menuData = res.menuData;
         this.categories = res.categories;
+        
       }
     }); 
     
@@ -94,6 +95,8 @@ export class GlobalMenuComponent implements OnInit {
         if (this.menuData.length) {
           this.cuisineTitle = this.menuData[0].name;
           this.cuisineBgImage = this.menuData[0].image;
+                this.updateCuisineHeader(this.categories[0].name, this.categories[0].image)
+
         }
         localStorage.setItem('menuData', JSON.stringify(this.menuData))
         localStorage.setItem('categories', JSON.stringify(this.categories))
