@@ -5,8 +5,8 @@ import { RouterLink } from '@angular/router';
 import { HomeComponentService } from '../../Services/home.service';
 
 interface backgroundInterface {
-   name:string, 
-    src: string
+  name: string,
+  src: string
 }
 @Component({
   selector: 'app-header',
@@ -18,9 +18,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   header = '';
   description = '';
   title = '';
-  
-  images:Array<backgroundInterface> = [
-        { name: 'tempImageForTest', src: '' },
+
+  images: Array<backgroundInterface> = [
   ];
 
   image = this.images[0];
@@ -45,17 +44,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
           name: `image ${++index} for slider`,
           src: img
         }))
+
       }
     })
-    this.subscription = interval(4000).subscribe(() => {
-      this.previousImage = JSON.parse(JSON.stringify(this.image));
-      this.index++;
-      if (this.index >= this.images.length) {
-        this.index = 0;
-      }
-      this.image = this.images[this.index];
-      // this.fade = !this.fade; // toggle fade class to trigger transition
-    });
+    if (this.images.length > 0) {
+      this.subscription = interval(4000).subscribe(() => {
+        this.previousImage = JSON.parse(JSON.stringify(this.image));
+        this.index++;
+        if (this.index >= this.images.length) {
+          this.index = 0;
+        }
+        this.image = this.images[this.index];
+        // this.fade = !this.fade; // toggle fade class to trigger transition
+      });
+    }
     AOS.init({
       // Global settings:
       disable: false,

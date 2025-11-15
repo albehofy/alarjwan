@@ -1,57 +1,65 @@
-@if (images[0].name != 'tempImageForTest' ) {
-  <div class="overlay" data-aos="zoom-in-up">
-    <div class="header-holder">
-      <nav>
-        <ul class="brand-info d-flex">
-          <li class="email flex-grow-1">
-            <a href="mailto:info@alarjwan.com" class="lowercase">
-              {{ "info@alarjwan.com" }}
-            </a>
+@if (images.length>0 && images[0].name != 'tempImageForTest' ) {
+<div class="overlay" data-aos="zoom-in-up">
+  <div class="header-holder">
+    <nav>
+      <ul class="brand-info d-flex">
+        <li class="email flex-grow-1">
+          <a href="mailto:info@alarjwan.com" class="lowercase">
+            {{ "info@alarjwan.com" }}
+          </a>
+        </li>
+        <li class="social-media flex-grow-1">
+          <a [href]="'https://www.tiktok.com/@alarjwan.r'" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+          <a [href]="'https://www.instagram.com/alarjwan.r'"><i class="fa-brands fa-instagram"></i></a>
+        </li>
+        <li class="address flex-grow-1">{{ "طريق عثمان بن عفان - الوادي - الرياض" }}</li>
+        <li class="phone flex-grow-1" dir="ltr">
+          <a href="tel:+966 55 367 8040">
+            +966 55 367 8040
+          </a>
+        </li>
+      </ul>
+      <div class="navbar d-flex">
+        <a href="#" class="logo"><img src="assets/images/logo-main.jpeg" alt="alarjwan logo" /></a>
+        <div class="hamburger" (click)="toggleNavbar()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <ul class="d-flex navbar-links">
+          <li class="link-holder"><a [routerLink]="['/about']"> من نحن </a></li>
+          <li class="link-holder">
+            <a [routerLink]="['/menu']"> قائمة الطعام </a>
           </li>
-          <li class="social-media flex-grow-1">
-            <a [href]="'https://www.tiktok.com/@alarjwan.r'" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
-            <a [href]="'https://www.instagram.com/alarjwan.r'"><i class="fa-brands fa-instagram"></i></a>
+          <li class="link-holder">
+            <a href="javascript:void(0)" (click)="scroll('subscriptions')"> باقات البوفيهات الخارجية </a>
           </li>
-          <li class="address flex-grow-1">{{ "طريق عثمان بن عفان - الوادي - الرياض" }}</li>
-          <li class="phone flex-grow-1" dir="ltr">
-            <a href="tel:+966 55 367 8040">
-              +966 55 367 8040
-            </a>
+          <li class="link-holder">
+            <a [routerLink]="['/contact-us']"> تواصل معنا </a>
           </li>
         </ul>
-        <div class="navbar d-flex">
-          <a href="#" class="logo"><img src="assets/images/logo-main.jpeg" alt="alarjwan logo" /></a>
-          <div class="hamburger" (click)="toggleNavbar()">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-          <ul class="d-flex navbar-links">
-            <li class="link-holder"><a [routerLink]="['/about']"> من نحن </a></li>
-            <li class="link-holder">
-              <a [routerLink]="['/menu']"> قائمة الطعام </a>
-            </li>
-            <li class="link-holder">
-              <a href="javascript:void(0)" (click)="scroll('subscriptions')"> باقات البوفيهات الخارجية </a>
-            </li>
-            <li class="link-holder">
-              <a [routerLink]="['/contact-us']"> تواصل معنا </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
+      </div>
+    </nav>
 
-      <header class="header">
-        <h1 data-aos="zoom-in-up" class="Effra_Rg">
-          {{header}}
-        </h1>
-        <p>{{title}}</p>
-        <h2 class="Effra_Rg">{{description}}</h2>
-      </header>
-    </div>
-    <div class="bg">
-      <img [src]="previousImage.src" alt="" [class.visible]="!fade" />
-      <img [src]="image.src" alt="" [class.visible]="fade" />
-    </div>
+    <header class="header">
+      <h1 data-aos="zoom-in-up" class="Effra_Rg">
+        {{header}}
+      </h1>
+      <p>{{title}}</p>
+      <h2 class="Effra_Rg">{{description}}</h2>
+    </header>
   </div>
+  @if (previousImage) {
+  <div class="bg">
+    <img [src]="previousImage.src" alt="" [class.visible]="!fade" />
+    <img [src]="image.src" alt="" [class.visible]="fade" />
+  </div>
+
+  }
+  @if (images.length == 1) {
+  <div class="bg">
+    <img [src]="images[0].src" alt="" [class.visible]="!fade" />
+  </div>
+  }
+</div>
 }
