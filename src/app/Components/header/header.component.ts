@@ -3,6 +3,11 @@ import { interval, Subscription } from 'rxjs';
 import * as AOS from 'aos';
 import { RouterLink } from '@angular/router';
 import { HomeComponentService } from '../../Services/home.service';
+
+interface backgroundInterface {
+   name:string, 
+    src: string
+}
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -14,8 +19,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   description = '';
   title = '';
   
-  images = [
-    { name: 'image', src: 'assets/images/header1.png' },
+  images:Array<backgroundInterface> = [
+        { name: 'tempImageForTest', src: '' },
   ];
 
   image = this.images[0];
